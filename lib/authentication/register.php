@@ -17,7 +17,6 @@ if (isset($_POST['signUp'])) {
     $errorEmail = false;
     $errorPassword = false;
 
-
     // error handler for empty fields
     if (empty($register_firstname) || empty($register_lastname) || empty($register_email) || empty($register_password) || empty($confirm_password)) {
         echo "<span class='form-error'>Fill in all fields!</span>";
