@@ -1,5 +1,8 @@
-<?php 
-    require_once 'lib/databaseHandler/connection.php';
+<?php
+
+require_once 'lib/databaseHandler/connection.php';
+require_once 'lib/init.php';
+
 ?>
 
 <!DOCTYPE html>
@@ -16,14 +19,14 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
     <link rel="stylesheet" href="assets/css/login.css" />
     <script type="text/javascript" src="assets/js/jquery.js"></script>
-    <link rel="stylesheet" href="assets/css/animate.min.css"/>
-    <link rel="stylesheet" href="assets/css/sweetalert2.min.css"/>
+    <link rel="stylesheet" href="assets/css/animate.min.css" />
+    <link rel="stylesheet" href="assets/css/sweetalert2.min.css" />
     <script type="text/javascript" src="assets/js/sweetalert2.all.min.js"></script>
-    
+
 
     <script>
         $(document).ready(function() {
-            $('#register').submit(function(event){
+            $('#register').submit(function(event) {
                 event.preventDefault();
 
                 var register_firstname = $('#register_firstname').val();
@@ -51,6 +54,25 @@
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#login-form').submit(function(event) {
+                event.preventDefault();
+
+                var email = $('#email').val();
+                var password = $('#password').val();
+                var login = $('#login').val();
+
+                $(".login-message").load("lib/authentication/login.php", {
+                    email: email,
+                    password: password,
+                    login: login
+                });
+
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -67,13 +89,14 @@
                 <div class="col-sm-6 login-section-wrapper">
                     <div class="login-wrapper my-auto">
                         <h1 class="login-title">Log in</h1>
-                        <form id="login" action="lib/authentication/login.php" method="post">
+                        <form id="login-form" action="lib/authentication/login.php" method="post">
+                            <p class="login-message"></p>
                             <div class="form-group form-floating mb-2">
-                                <input type="text" name="email" class="form-control" placeholder=" " required />
+                                <input type="text" id="email" name="email" class="form-control" placeholder=" " />
                                 <label for="email">Email or Username</label>
                             </div>
                             <div class="form-floating mb-4">
-                                <input type="password" id="youCantCopyTheValue" name="password" class="form-control" placeholder=" "  />
+                                <input type="password" id="password" name="password" class="form-control" placeholder=" " />
                                 <label for="password">Password</label>
                             </div>
                             <input name="btn_login" id="login" class="btn btn-block login-btn" type="submit" value="Login" />
@@ -113,17 +136,17 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="register_lastname" name="register_lastname" placeholder="Lastname" >
+                                    <input type="text" class="form-control" id="register_lastname" name="register_lastname" placeholder="Lastname">
                                     <label for="register_lastname">Lastname</label>
                                 </div>
                             </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="register_middlename" name="register_middlename" placeholder="Middlename" >
+                            <input type="text" class="form-control" id="register_middlename" name="register_middlename" placeholder="Middlename">
                             <label for="register_middlename">Middlename</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="register_email" name="register_email" autocomplete="false" placeholder="name@example.com" >
+                            <input type="email" class="form-control" id="register_email" name="register_email" autocomplete="false" placeholder="name@example.com">
                             <label for="register_email">Email</label>
                         </div>
                         <div class="form-floating mb-3">
@@ -142,7 +165,7 @@
                             <label for="section">Section</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="register_password" placeholder="password" >
+                            <input type="password" class="form-control" id="register_password" placeholder="password">
                             <label for="register_password">Password</label>
                         </div>
                         <div class="form-floating mb-3">

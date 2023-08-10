@@ -1,6 +1,7 @@
 <?php
 $page = 'Home';
 require_once 'lib/databaseHandler/connection.php';
+require_once 'lib/init.php';
 
 ?>
 

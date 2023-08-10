@@ -77,14 +77,8 @@ if (isset($_POST['signUp'])) {
                     title: "Registration Successful!",
                     text: "You can login to your account now",
                     icon: "success",
-                    timer: 3000,
+                    timer: 2000,
                     timerProgressBar: true,
-                    showClass: {
-                        popup: "animate__animated animate__fadeInDown"
-                    },
-                    hideClass: {
-                        popup: "animate__animated animate__fadeOutUp"
-                    },
                     showConfirmButton: false
                 })
                 </script>';

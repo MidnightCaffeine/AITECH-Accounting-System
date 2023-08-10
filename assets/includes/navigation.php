@@ -58,11 +58,11 @@
             </li>
             
             <li class="nav-item dropdown pe-3">
-                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown"> <img src="assets/img/profile-img.svg" alt="Profile" class="rounded-circle"> <span class="d-none d-md-block dropdown-toggle ps-2">Jassa</span> </a>
+                <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown"> <img src="assets/img/profile-img.svg" alt="Profile" class="rounded-circle"> <span class="d-none d-md-block dropdown-toggle ps-2"><?php echo $_SESSION['firstname']?></span> </a>
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>AItech</h6>
-                        <span>Administrator</span>
+                        <h6><?php echo $_SESSION['fullname']?></h6>
+                        <span><?php echo $_SESSION['userEmail']?></span>
                     </li>
                     <li>
                         <hr class="dropdown-divider">
@@ -71,7 +71,7 @@
                     <li>
                         <hr class="dropdown-divider">
                     </li>
-                    <li> <a class="dropdown-item d-flex align-items-center" href="#"> <i class="bi bi-box-arrow-right"></i> <span>Sign Out</span> </a></li>
+                    <li> <a class="dropdown-item d-flex align-items-center" href="logout.php"> <i class="bi bi-box-arrow-right"></i> <span>Sign Out</span> </a></li>
                 </ul>
             </li>
         </ul>
