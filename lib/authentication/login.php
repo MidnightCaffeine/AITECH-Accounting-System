@@ -35,6 +35,9 @@ if (isset($_POST['login'])) {
 
             $id = $row['user_id'];
             $_SESSION['userEmail'] = htmlspecialchars($row['email']);
+            if(password_verify('1', $row['privilege'])){
+                $_SESSION['userType'] = '1';
+            }
 
             $select = $pdo->prepare("SELECT * FROM students WHERE user_id = '$id'");
             if ($select->execute()) {
