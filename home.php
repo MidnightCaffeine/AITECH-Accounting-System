@@ -8,7 +8,7 @@ require_once 'lib/init.php';
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once 'assets/includes/head.php'; ?>
-
+</head>
 <body>
 
    <?php

@@ -22,8 +22,6 @@ require_once 'lib/init.php';
     <link rel="stylesheet" href="assets/css/animate.min.css" />
     <link rel="stylesheet" href="assets/css/sweetalert2.min.css" />
     <script type="text/javascript" src="assets/js/sweetalert2.all.min.js"></script>
-
-
     <script>
         $(document).ready(function() {
             $('#register').submit(function(event) {
@@ -53,6 +51,7 @@ require_once 'lib/init.php';
                 });
             });
         });
+
     </script>
 
     <script>
@@ -160,7 +159,15 @@ require_once 'lib/init.php';
                         </div>
                         <div class="form-floating mb-3">
                             <select class="form-select" id="section">
-                                <option value="1">...</option>
+                                <option value="1">A</option>
+                                <option value="2">B</option>
+                                <option value="3">C</option>
+                                <option value="4">D</option>
+                                <option value="5">E</option>
+                                <option value="6">F</option>
+                                <option value="7">G</option>
+                                <option value="8">H</option>
+                                <option value="9">I</option>
                             </select>
                             <label for="section">Section</label>
                         </div>

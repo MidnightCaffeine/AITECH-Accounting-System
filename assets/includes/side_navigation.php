@@ -7,7 +7,7 @@
                 echo 'collapsed';
             }
             ?>
-            " href="dashboard.php">
+            " href="home.php">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
