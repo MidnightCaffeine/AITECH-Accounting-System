@@ -2,7 +2,9 @@
 require_once '../databaseHandler/connection.php';
 
 
-if (isset($_POST['add_fees'])) {
+if (isset($_POST['edit_fees'])) {
+
+    $id = $_POST['hid'];
     $fees_title = $_POST['fees_title'];
     $fees_details = $_POST['fees_details'];
     $fees_year = $_POST['fees_year'];
@@ -30,21 +32,23 @@ if (isset($_POST['add_fees'])) {
         echo "<span class='form-error'>Fill in all fields!</span>";
         $errorDeadline = true;
     } else {
-        $insert = $pdo->prepare("INSERT INTO fees_list(fees_title, fees_description, year_included, cost, deadline) VALUES(:fees_title, :fees_description, :year_included, :cost, :deadline)");
 
-        $insert->bindparam('fees_title', $fees_title);
-        $insert->bindparam('fees_description', $fees_details);
-        $insert->bindparam('year_included', $fees_year);
-        $insert->bindparam('cost', $fees_cost);
-        $insert->bindparam('deadline', $deadline);
+        $update = $pdo->prepare("UPDATE fees_list SET fees_title = :fees_title, fees_description = :fees_description, year_included = :year_included , cost = :cost , deadline = :deadline WHERE fees_id = :id");
 
-        $insert->execute();
+        $update->bindparam('fees_title', $fees_title);
+        $update->bindparam('fees_description', $fees_details);
+        $update->bindparam('year_included', $fees_year);
+        $update->bindparam('cost', $fees_cost);
+        $update->bindparam('deadline', $deadline);
+        $update->bindparam('id', $id);
+
+        $update->execute();
     }
 }
 ?>
 
 <script>
-    $("#fees_title, #fees_details, #fees_cost, #deadline").removeClass(".input-error");
+    $("#edit_fees_title, #edit_fees_details, #edit_fees_cost, #edit_deadline").removeClass(".input-error");
 
     var errorTitle = "<?php echo $errorTitle; ?>";
     var errorDetails = "<?php echo $errorDetails; ?>";
@@ -66,17 +70,17 @@ if (isset($_POST['add_fees'])) {
     }
 
     if (errorTitle == false && errorDetails == false && errorCost == false && errorDeadline == false) {
-        $("#fees_title, #fees_details, #fees_cost, #deadline").val("");
+        $("#edit_fees_title, #edit_fees_details, #edit_fees_cost, #edit_deadline").val("");
 
-        var myModalEl = document.getElementById('addFees');
+        var myModalEl = document.getElementById('editFees');
         var modal = bootstrap.Modal.getInstance(myModalEl)
         modal.hide();
 
         $('#feesTable').DataTable().ajax.reload();
 
         Swal.fire({
-            title: "Adding Fess Successful!",
-            text: "You can now view the fees on fees tab",
+            title: "Details Changed!!!",
+            text: "Details updated on th database",
             icon: "success",
             timer: 2000,
             timerProgressBar: true,
