@@ -23,15 +23,15 @@ $columns = array(
         'db'        => 'year_included',
         'dt'        => 2,
         'formatter' => function ($d, $row) {
-            if ($d == 1) {
+            if ($d == 5) {
                 $d = 'All';
-            } elseif ($d == 2) {
+            } elseif ($d == 1) {
                 $d = '1st Year';
-            } elseif ($d == 3) {
+            } elseif ($d == 2) {
                 $d = '2nd Year';
-            } elseif ($d == 4) {
+            } elseif ($d == 3) {
                 $d = '3rd Year';
-            } elseif ($d == 5) {
+            } elseif ($d == 4) {
                 $d = '4th Year';
             }
             return $d;

@@ -35,18 +35,28 @@ if (isset($_POST['login'])) {
 
             $id = $row['user_id'];
             $_SESSION['userEmail'] = htmlspecialchars($row['email']);
-            if(password_verify('1', $row['privilege'])){
+            if (password_verify('1', $row['privilege'])) {
                 $_SESSION['userType'] = '1';
             }
 
             $select = $pdo->prepare("SELECT * FROM students WHERE user_id = '$id'");
             if ($select->execute()) {
                 while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
+                    $id = $row['student_id'];
                     $firstname = htmlspecialchars($row["firstname"]);
+                    $middlename = htmlspecialchars($row["middlename"]);
                     $lastname = htmlspecialchars($row["lastname"]);
+                    $_SESSION['year_level'] = $row['year_group'];
+                    $section = $row['section'];
                     $_SESSION['firstname'] = $firstname;
                 }
-                $_SESSION['fullname'] = $firstname . " " . $lastname;
+                $_SESSION['student_id'] = $id;
+                $_SESSION['section'] = $section;
+                if ($middlename != null) {
+                    $_SESSION['fullname'] = $firstname . " " . $middlename . " " . $lastname;
+                } else {
+                    $_SESSION['fullname'] = $firstname . " " . $lastname;
+                }
             }
         }
     }
@@ -77,10 +87,10 @@ if (isset($_POST['login'])) {
 
     }
 
-    if (loginErrorEmail == false){
+    if (loginErrorEmail == false) {
         $("#email").removeClass(".input-error");
     }
-    if (loginErrorPassword == false){
+    if (loginErrorPassword == false) {
         $("#password").removeClass(".input-error");
     }
 

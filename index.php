@@ -3,6 +3,11 @@
 require_once 'lib/databaseHandler/connection.php';
 require_once 'lib/init.php';
 
+if (isset($_SESSION['fullname'])) {
+    header("Location: home.php");
+}
+
+
 ?>
 
 <!DOCTYPE html>
