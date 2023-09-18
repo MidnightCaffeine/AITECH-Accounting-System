@@ -34,6 +34,7 @@ if (isset($_POST['login'])) {
         if (password_verify($password, $row['password'])) {
 
             $id = $row['user_id'];
+            $_SESSION['myid'] = $id;
             $_SESSION['userEmail'] = htmlspecialchars($row['email']);
             if (password_verify('1', $row['privilege'])) {
                 $_SESSION['userType'] = '1';
