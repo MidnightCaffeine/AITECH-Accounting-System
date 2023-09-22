@@ -1,4 +1,5 @@
 <?php
+header("Set-Cookie: SameSite=None; Secure");
 $page = 'Payments';
 require_once 'lib/databaseHandler/connection.php';
 require_once 'lib/init.php';
@@ -15,83 +16,10 @@ $id = $_SESSION['student_id'];
 $name = $_SESSION['fullname'];
 $section = $_SESSION['section'];
 ?>
-
+<script type="text/javascript" src="assets/js/payments.js"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=AVeUFWNBOj3tp0ngzcepKxyTYbPUctLGdBQcCFS5jOdI52s8KMrx5f_q_mV6BVc8K2k-D4I5BAw2-opv"></script>
 <script>
-    $(document).ready(function() {
 
-        $("#paymentTable").DataTable();
-
-
-        $(document).on("click", ".partialPay", function() {
-            var fees_id = $(this).attr("id");
-            $.ajax({
-                url: "lib/payment/partial_fetch.php",
-                method: "POST",
-                data: {
-                    fees_id: fees_id
-                },
-                dataType: "json",
-                success: function(data) {
-                    $("#payPartial").modal("show");
-                    $("#paritalPay_title").text(data.title);
-                    $("#paritalPay_details").text(data.descripton);
-                    $("#paritalPay_toPay").text(data.cost);
-                    $("#paritalPay_deadline").text(data.deadline);
-                    $("#paritalPay_balance").text(data.payed);
-                    $("#hidden_id").val(data.payment_id);
-                    $(".modal-title").text("Payment for " + data.title);
-                },
-            });
-        });
-
-        $(document).on("click", ".payNew", function() {
-            var fees_id = $(this).attr("id");
-            $.ajax({
-                url: "lib/payment/new_fetch.php",
-                method: "POST",
-                data: {
-                    fees_id: fees_id
-                },
-                dataType: "json",
-                success: function(data) {
-                    $("#newPayment").modal("show");
-                    $("#new_paritalPay_title").text(data.title);
-                    $("#new_paritalPay_details").text(data.descripton);
-                    $("#new_paritalPay_toPay").text(data.cost);
-                    $("#new_paritalPay_deadline").text(data.deadline);
-                    $("#hdeadline").val(data.deadline);
-                    $("#new_paritalPay_balance").text(data.payed);
-                    $("#hbalance").val(data.payed);
-                    $("#hfees_id").val(data.fees_id);
-                    $(".modal-title").text("Payment for " + data.title);
-                },
-            });
-        });
-
-        $("#newPayment_form").submit(function(event) {
-            event.preventDefault();
-
-            var fees_id = $("#hfees_id").val();
-            var student_id = $("#student_id").val();
-            var fullname = $("#fullname").val();
-            var section = $("#section").val();
-            var year_level = $("#year_level").val();
-            var date = $("#hdeadline").val();
-            var cost = $("#hbalance").val();
-            var fullpayment = $("#fullPayment").val();
-
-            $(".form-message").load("lib/payment/new_payment.php", {
-                fees_id: fees_id,
-                student_id: student_id,
-                fullname: fullname,
-                section: section,
-                year_level: year_level,
-                date: date,
-                cost: cost,
-                fullpayment: fullpayment
-            });
-        });
-    });
 </script>
 
 </head>
@@ -168,7 +96,7 @@ $section = $_SESSION['section'];
                                 <td><?php echo $deadline[$a]; ?></td>
                                 <td><?php echo $balance[$a]; ?></td>
                                 <td>
-                                    <button type="button" id="<?php echo $fees_id[$a]; ?>" class="btn btn-primary partialPay me-2" name="partial">
+                                    <button type="button" id="<?php echo $fees_id[$a]; ?>" class="btn btn-primary payNew me-2" name="pay_new">
                                         <i class="bi bi-wallet2">
                                             <span> Pay</span>
                                         </i>
@@ -185,6 +113,8 @@ $section = $_SESSION['section'];
 
                 </tbody>
             </table>
+
+
         </section>
     </main>
     <?php
@@ -245,16 +175,45 @@ $section = $_SESSION['section'];
                         <input type="hidden" id="section" name="section" value="<?php echo $section; ?>">
                         <input type="hidden" id="year_level" name="year_level" value="<?php echo $year_level; ?>">
 
-                </div>
-                <div class="modal-footer">
-                    <button id="fullPayment" type="submit" class="btn btn-primary" data-bs-dismiss="modal">Full Payment</button>
-                    <button type="submit" class="btn btn-success">Partial</button>
+
+
+                        <div class="d-flex align-items-center justify-content-center mb-2">
+
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input paymentType" type="radio" name="payment" id="fullPayment" value="1" checked>
+                                <label class="form-check-label" for="fullPayment">Full Payment</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input paymentType" type="radio" name="payment" id="partial" value="2">
+                                <label class="form-check-label paymentType partial" for="partial">Partial</label>
+                            </div>
+
+
+                        </div>
+                        <div class="partialValues" id="partialValues">
+                            <div class="d-flex align-items-center justify-content-center mb-2">
+
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input partialVal" type="radio" name="partialPay" id="partial50" value="50">
+                                    <label class="form-check-label" for="partial50">50</label>
+                                </div>
+                                <div class="form-check form-check-inline partialVal">
+                                    <input class="form-check-input" type="radio" name="partialPay" id="partial100" value="2">
+                                    <label class="form-check-label partial" for="partial100">100</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5>To Pay : <span id="toPay"></span></h5>
+
+                        <!-- renders paypal button -->
+                        <div id="paypal-button-container"></div>
+                        <!-- renders paypal button end -->
                 </div>
             </div>
             </form>
         </div>
     </div>
-
 
 </body>
 
