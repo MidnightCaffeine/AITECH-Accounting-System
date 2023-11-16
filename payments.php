@@ -84,11 +84,11 @@ $section = $_SESSION['section'];
                                         </i>
                                     </button>
                                 </td>
-
-                            <?php
+                            </tr>
+                        <?php
                         } elseif ($result[0]['status'] != 1) {
                             $balance = [$cost[$a] - $result[0]['cost']];
-                            ?>
+                        ?>
                             <tr>
                                 <td><?php echo $title[$a]; ?></td>
                                 <td><?php echo $description[$a]; ?></td>

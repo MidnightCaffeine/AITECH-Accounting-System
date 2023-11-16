@@ -11,7 +11,7 @@ if (isset($_POST['signUp'])) {
     $register_password = $_POST['register_password'];
     $confirm_password = $_POST['confirm_password'];
     $hashed_password = password_hash($register_password, PASSWORD_DEFAULT);
-    $position = password_hash('3', PASSWORD_DEFAULT);
+    $position = 3;
 
     $errorEmpty = false;
     $errorEmail = false;
