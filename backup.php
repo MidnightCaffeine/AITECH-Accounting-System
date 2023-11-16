@@ -321,13 +321,13 @@ $t = date("h:i:s A");
                     //echo'Connection Successful!';
 
                     $action = 'Backup the database named backup-' . DB_NAME . '-' . date("Ymd_His", time()) . '.sql.gz';
-                    $insertLog = $pdo->prepare("INSERT INTO logs(user_id, user_email, action, log_date, log_time) values(:id, :user, :action, :logDate, :logTime)");
+                    $type = 1;
+                    $insertLog = $pdo->prepare("INSERT INTO logs(user_id, user_email, action, type) values(:id, :user, :action, :type)");
 
                     $insertLog->bindParam(':id', $_SESSION['myid']);
                     $insertLog->bindParam(':user', $_SESSION['userEmail']);
                     $insertLog->bindParam(':action', $action);
-                    $insertLog->bindParam(':logDate', $d);
-                    $insertLog->bindParam(':logTime', $t);
+                    $insertLog->bindParam(':type', $type);
                     $insertLog->execute();
                 }
                 ?>

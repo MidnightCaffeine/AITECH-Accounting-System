@@ -1,6 +1,6 @@
 <?php
 require_once '../databaseHandler/connection.php';
-
+session_start();
 
 if (isset($_POST['add_fees'])) {
     $fees_title = $_POST['fees_title'];
@@ -9,6 +9,9 @@ if (isset($_POST['add_fees'])) {
     $fees_cost = $_POST['fees_cost'];
     $deadline = strtotime($_POST['deadline']);
     $deadline = date("Y-m-d", $deadline);
+
+    $type = 4;
+    $action = 'Created new fees named ' . $fees_title;
 
     $errorTitle = false;
     $errorDetails = false;
@@ -38,7 +41,15 @@ if (isset($_POST['add_fees'])) {
         $insert->bindparam('cost', $fees_cost);
         $insert->bindparam('deadline', $deadline);
 
-        $insert->execute();
+        if ($insert->execute()) {
+            $insertLog = $pdo->prepare("INSERT INTO logs(user_id, user_email, action, type) values(:id, :user, :action, :type)");
+
+            $insertLog->bindParam(':id', $_SESSION['myid']);
+            $insertLog->bindParam(':user', $_SESSION['userEmail']);
+            $insertLog->bindParam(':action', $action);
+            $insertLog->bindParam(':type', $type);
+            $insertLog->execute();
+        }
     }
 }
 ?>

@@ -1,7 +1,7 @@
 <?php
 require_once '../databaseHandler/connection.php';
 
-if (isset($_POST['fullpayment'])) {
+if (isset($_POST['cost'])) {
 
     $fees_id = $_POST['fees_id'];
     $student_id =  $_POST['student_id'];

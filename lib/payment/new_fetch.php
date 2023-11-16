@@ -33,6 +33,7 @@ if (isset($_POST["fees_id"])) {
         echo json_encode($output);
     } elseif ($checking[0]['status'] != 1) {
         foreach ($result as $row) {
+            $output["fees_id"] = $row["fees_id"];
             $output["title"] = $row["fees_title"];
             $output["descripton"] = $row["fees_description"];
             $output["cost"] = $row["cost"];

@@ -122,34 +122,6 @@ $section = $_SESSION['section'];
     require_once 'assets/includes/script.php';
     ?>
 
-    <!-- partial pay modal -->
-    <div class="modal fade" id="payPartial" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="partialPayment" action="lib/payment/partial.php" method="post">
-                        <p class="form-message"></p>
-
-                        <h5>Title : <span id="paritalPay_title"></span></h5>
-                        <h5>Details : <span id="paritalPay_details"></span></h5>
-                        <h5>Cost : <span id="paritalPay_toPay"></span></h5>
-                        <h5>Deadline : <span id="paritalPay_deadline"></span></h5>
-                        <h5>Balance : <span id="paritalPay_balance"></span></h5>
-                        <input type="hidden" id="hidden_id" name="hidden_id">
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Understood</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="modal fade" id="newPayment" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -161,7 +133,7 @@ $section = $_SESSION['section'];
                     <form id="newPayment_form" action="lib/payment/new_payment.php" method="post">
                         <p class="form-message"></p>
 
-                        <h5>Title : <span id="new_paritalPay_title"></span></h5>
+                        <h5>Title : <span id="new_paritalPay_title"></span> <span id="fees_id"></span></h5>
                         <h5>Details : <span id="new_paritalPay_details"></span></h5>
                         <h5>Cost : <span id="new_paritalPay_toPay"></span></h5>
                         <h5>Deadline : <span id="new_paritalPay_deadline"></span></h5>
@@ -185,7 +157,7 @@ $section = $_SESSION['section'];
                             </div>
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input paymentType" type="radio" name="payment" id="partial" value="2">
-                                <label class="form-check-label paymentType partial" for="partial">Partial</label>
+                                <label class="form-check-label paymentType partial" for="partial" id="partialId">Partial</label>
                             </div>
 
 
@@ -194,17 +166,17 @@ $section = $_SESSION['section'];
                             <div class="d-flex align-items-center justify-content-center mb-2">
 
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input partialVal" type="radio" name="partialPay" id="partial50" value="50">
-                                    <label class="form-check-label" for="partial50">50</label>
+                                    <input class="form-check-input partialVal" type="radio" name="partialPay" id="partial50" value="50" checked>
+                                    <label class="form-check-label" for="partial50" id="partial50Id">50</label>
                                 </div>
                                 <div class="form-check form-check-inline partialVal">
                                     <input class="form-check-input" type="radio" name="partialPay" id="partial100" value="2">
-                                    <label class="form-check-label partial" for="partial100">100</label>
+                                    <label class="form-check-label partial" for="partial100" id="partial100Id">100</label>
                                 </div>
                             </div>
                         </div>
 
-                        <h5>To Pay : <span id="toPay"></span></h5>
+                        <h5>To Pay : <span id="toPay"></span>PHP (<span id="toUsd"></span> USD)</h5>
 
                         <!-- renders paypal button -->
                         <div id="paypal-button-container"></div>
