@@ -3,13 +3,6 @@ $page = 'Home';
 require_once 'lib/databaseHandler/connection.php';
 require_once 'lib/init.php';
 require_once 'lib/no_session_bypass.php';
-require_once 'lib/authentication/paypal.php';
-
-
-$paypal = new Paypal('sb-wccoz26819420_api1.business.example.com', 'QNHBUMAU8WCKK6EV', 'AErUJZx.Btq3.dnDQaYLyX-ypnZAAuIxEG4xJmtDpoxgdB.JpM6cFyx0', 'sandbox');
-
-// Make an API call to get balance
-$response = $paypal->call('GetBalance');
 
 ?>
 
@@ -46,10 +39,7 @@ $response = $paypal->call('GetBalance');
                               <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i class="bi bi-wallet2"></i></div>
                               <div class="ps-3">
                                  <h6>
-                                    <?php $balance = $response['L_AMT0'] * 55.88;
-                                    $amount = number_format($balance, 2, '.', ',');
-                                    $amountUSD = number_format($response['L_AMT0'], 2, '.', ',');
-                                    echo $amount; ?> PHP (<?php echo $amountUSD; ?> USD)
+                                    <span id="peso">Loading...</span> PHP (<span id="usd">Loading...</span> USD)
                                  </h6>
                               </div>
                            </div>
@@ -92,7 +82,7 @@ $response = $paypal->call('GetBalance');
                   <div class="card-body">
                      <h5 class="card-title">Recent Activity <span>| Today</span></h5>
                      <div id="activity" class="activity">
-
+                        Loading...
                      </div>
                   </div>
                </div>
