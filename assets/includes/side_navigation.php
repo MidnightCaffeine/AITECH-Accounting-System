@@ -7,7 +7,11 @@
                 echo 'collapsed';
             }
             ?>
-            " href="home.php">
+            " href="<?php if($_SESSION['userType'] == 1){
+                echo 'admin_dashboard.php';
+            }else{
+                echo 'home.php';
+            }?>">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
