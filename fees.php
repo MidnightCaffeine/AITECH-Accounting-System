@@ -166,6 +166,34 @@ require_once 'lib/no_session_bypass.php';
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="paidStudents" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="paid" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="paid">Paid Students</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Year And Section</th>
+                                <th scope="col">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paid_students">
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>

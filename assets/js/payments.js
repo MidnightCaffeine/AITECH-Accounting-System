@@ -5,6 +5,7 @@ $(document).ready(function () {
   var payment;
   $(".partialValues").hide();
   $("#paymentTable").DataTable();
+  $("#paidTable").DataTable();
 
   $(document).on("click", ".partialPay", function () {
     var fees_id = $(this).attr("id");

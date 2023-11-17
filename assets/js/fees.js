@@ -105,4 +105,12 @@ $(document).ready(function () {
       hid: hid,
     });
   });
+
+  $('[data-toggle="tooltip"]').tooltip();
+  $(document).on("click", ".view", function () {
+    var fees_id = $(this).attr("id");
+
+    $("#paidStudents").modal("show");
+    $("#paid_students" ).load( "lib/fees/view_paid.php", { "datas[]": [ fees_id] } );
+  });
 });

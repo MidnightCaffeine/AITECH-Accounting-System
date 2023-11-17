@@ -87,7 +87,7 @@ if (isset($_SESSION['fullname'])) {
                     <img src="assets/img/login.jpg" alt="Random Images" class="login-img" />
                     <div class="caption">
                         <img src="assets/img/logo.png" alt="logo" class="logo animate__animated animate__bounce" />
-                        <h3>AITECH Accounting System</h3>
+                        <h3>AITECHS Accounting System</h3>
                     </div>
                 </div>
                 <div class="col-sm-6 login-section-wrapper">

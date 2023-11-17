@@ -48,7 +48,7 @@ $columns = array(
         'db'        => 'fees_id',
         'dt'        => 5,
         'formatter' => function ($d, $row) {
-            $d = '<button type="button" id="'. $d . '" class="btn btn-primary update me-2" name="update"><i class="bi bi-pencil-square"></i></button><button type="button" id="'. $d . '" class="btn btn-danger delete" name="delete"><i class="bi bi-trash"></i></button>';
+            $d = '<button type="button" id="'. $d . '" class="btn btn-success me-2 view" name="view" data-toggle="tooltip" data-placement="bottom" title="View Paid Students"><i class="bi bi-eye"></i></button><button type="button" id="'. $d . '" class="btn btn-primary update me-2" name="update" data-toggle="tooltip" data-placement="bottom" title="Edit Fees"><i class="bi bi-pencil-square"></i></button><button type="button" id="'. $d . '" class="btn btn-danger view" name="delete" data-toggle="tooltip" data-placement="bottom" title="Delete Fees"><i class="bi bi-trash"></i></button>';
             return $d;
         }
     )

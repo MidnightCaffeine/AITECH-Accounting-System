@@ -59,7 +59,7 @@
                 echo 'collapsed';
             }
             ?>
-            " href="Payments.html">
+            " href="logs.php">
                 <i class="bi bi-file-earmark-richtext"></i>
                 <span>Log</span>
             </a>

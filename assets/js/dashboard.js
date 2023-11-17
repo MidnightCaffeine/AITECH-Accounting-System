@@ -12,7 +12,7 @@ $(document).ready(function () {
         },
     });
 
-    $("#activity").load("lib/log/fetch_log.php");
+    $("#activity").load("lib/dashboard/fetch_log.php");
     $("#near_deadline").load("lib/dashboard/check_upcoming_deadline.php");
 
     $(document).on("click", ".view", function () {
