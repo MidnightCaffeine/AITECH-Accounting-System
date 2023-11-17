@@ -38,6 +38,8 @@ if (isset($_POST['login'])) {
             $_SESSION['userEmail'] = htmlspecialchars($row['email']);
             if (password_verify('1', $row['privilege'])) {
                 $_SESSION['userType'] = '1';
+            }else{
+                $_SESSION['userType'] = '3';
             }
 
             $select = $pdo->prepare("SELECT * FROM students WHERE user_id = '$id'");
@@ -74,6 +76,7 @@ if (isset($_POST['login'])) {
 <script>
     $("#email, #password").removeClass(".input-error");
 
+    var position = "<?php echo $_SESSION['userType']; ?>";
     var loginErrorEmail = "<?php echo $loginErrorEmail; ?>";
     var loginErrorPassword = "<?php echo $loginErrorPassword; ?>";
     var combinationError = "<?php echo $combinationError; ?>";
@@ -106,7 +109,11 @@ if (isset($_POST['login'])) {
         });
 
         setTimeout(function() {
-            window.location.replace("home.php"); //will redirect to homepage
+            if(position == 1){
+                window.location.replace("admin_dashboard.php")
+            }else{
+                window.location.replace("home.php")
+            } //will redirect to homepage
         }, 2000); //redirect after 2 seconds
 
     }

@@ -13,44 +13,62 @@
             </a>
         </li>
 
-        <li class="nav-item">
-            <a class="nav-link
+        <?php
+        if ($_SESSION['userType'] == 1) {
+        ?>
+            <li class="nav-item">
+                <a class="nav-link
             <?php
             if ($page != 'Fees') {
                 echo 'collapsed';
             }
             ?>
             " href="fees.php">
-                <i class="bi bi-cash"></i>
-                <span>Fees</span>
-            </a>
-        </li>
+                    <i class="bi bi-cash"></i>
+                    <span>Fees</span>
+                </a>
+            </li>
+        <?php
+        }
+        ?>
 
-        <li class="nav-item">
-            <a class="nav-link 
+        <?php
+        if ($_SESSION['userType'] != 1) {
+        ?>
+            <li class="nav-item">
+                <a class="nav-link 
             <?php
             if ($page != 'Payments') {
                 echo 'collapsed';
             }
             ?>
             " href="payments.php">
-                <i class="bi bi-wallet2"></i>
-                <span>Payments</span>
-            </a>
-        </li>
+                    <i class="bi bi-wallet2"></i>
+                    <span>Payments</span>
+                </a>
+            </li>
+        <?php
+        }
+        ?>
 
-        <li class="nav-item">
-            <a class="nav-link
+        <?php
+        if ($_SESSION['userType'] == 1) {
+        ?>
+            <li class="nav-item">
+                <a class="nav-link
             <?php
             if ($page != 'Backup And Restore') {
                 echo 'collapsed';
             }
             ?>
             " href="backupAndRestore.php">
-            <i class="bi bi-file-zip"></i>
-                <span>Backup And Restore</span>
-            </a>
-        </li>
+                    <i class="bi bi-file-zip"></i>
+                    <span>Backup And Restore</span>
+                </a>
+            </li>
+        <?php
+        }
+        ?>
 
         <li class="nav-item">
             <a class="nav-link 
@@ -59,7 +77,11 @@
                 echo 'collapsed';
             }
             ?>
-            " href="logs.php">
+            " href="<?php if ($_SESSION['userType'] == 1) {
+                        echo 'logs.php';
+                    }else{
+                        echo 'client_logs.php';
+                    } ?>">
                 <i class="bi bi-file-earmark-richtext"></i>
                 <span>Log</span>
             </a>

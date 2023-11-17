@@ -9,7 +9,7 @@ require_once 'lib/no_session_bypass.php';
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once 'assets/includes/head.php'; ?>
-<script type="text/javascript" src="assets/js/dashboard.js"></script>
+<script type="text/javascript" src="assets/js/client_dashboard.js"></script>
 </head>
 
 <body>
@@ -31,21 +31,6 @@ require_once 'lib/no_session_bypass.php';
          <div class="row">
             <div class="col-lg-8">
                <div class="row">
-                  <div class="col-xxl-12 col-md-12">
-                     <div class="card info-card revenue-card">
-                        <div class="card-body">
-                           <h5 class="card-title">Balance <span>| Today</span></h5>
-                           <div class="d-flex align-items-center">
-                              <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"> <i class="bi bi-wallet2"></i></div>
-                              <div class="ps-3">
-                                 <h6>
-                                    <span id="peso">Loading...</span> PHP (<span id="usd">Loading...</span> USD)
-                                 </h6>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
                   <div class="col-xxl-12 col-xl-12">
                      <div class="card">
                         <div class="card-body">
@@ -59,7 +44,6 @@ require_once 'lib/no_session_bypass.php';
                                        <th scope="col">Details</th>
                                        <th scope="col">Cost</th>
                                        <th scope="col">Deadline</th>
-                                       <th scope="col">Action</th>
                                     </tr>
                                  </thead>
                                  <tbody id="near_deadline">
@@ -96,7 +80,7 @@ require_once 'lib/no_session_bypass.php';
                      </div>
 
                      <div id="moreLogs" class="mt-3 container-fluid d-flex justify-content-center align-items-center custom-container">
-                        <button class="btn btn-primary block">View All Logs</button>
+                        <a href="logs.php" class="btn btn-primary block">View All Logs</a>
                      </div>
                   </div>
                </div>
