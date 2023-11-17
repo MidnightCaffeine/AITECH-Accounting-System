@@ -22,7 +22,7 @@ if ($feesWithTenDaysDeadline) {
         // Process each fee record (e.g., display or manipulate data)
         // Access data like $fee['column_name']
 
-        if ($fee['year_included'] == 5 || $fee['year_included'] == $_SESSION['year_level']) {
+        if ($_SESSION['userType'] != 1 && $fee['year_included'] == 5 || $fee['year_included'] == $_SESSION['year_level']) {
 ?>
             <tr>
                 <th><?php echo $fee['fees_id'] ?></th>
