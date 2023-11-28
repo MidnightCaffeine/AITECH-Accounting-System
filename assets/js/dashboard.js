@@ -21,7 +21,11 @@ $(document).ready(function () {
 
         $("#view_students").modal("show");
     
-        $( "#unpaid_students" ).load( "lib/dashboard/check_unpaid_students.php", { "datas[]": [ fees_id, year_include ] } );
+        // $( "#unpaid_students" ).load( "lib/dashboard/check_unpaid_students.php", { "datas[]": [ fees_id, year_include ] } );
+        $( "#freshman_table" ).load( "lib/dashboard/unpaid_freshman.php", { "datas[]": [ fees_id, year_include ] } );
+        $( "#sophomore_table" ).load( "lib/dashboard/unpaid_sophomore.php", { "datas[]": [ fees_id, year_include ] } );
+        $( "#junior_table" ).load( "lib/dashboard/unpaid_junior.php", { "datas[]": [ fees_id, year_include ] } );
+        $( "#senior_table" ).load( "lib/dashboard/unpaid_senior.php", { "datas[]": [ fees_id, year_include ] } );
     });
 
 });

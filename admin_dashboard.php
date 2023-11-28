@@ -96,7 +96,7 @@ require_once 'lib/no_session_bypass.php';
                             </div>
 
                             <div id="moreLogs" class="mt-3 container-fluid d-flex justify-content-center align-items-center custom-container">
-                            <a href="logs.php" class="btn btn-primary block">View All Logs</a>
+                                <a href="logs.php" class="btn btn-primary block">View All Logs</a>
                             </div>
                         </div>
                     </div>
@@ -122,7 +122,81 @@ require_once 'lib/no_session_bypass.php';
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped">
+
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Freshman</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Sophomore</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="junior-tab" data-bs-toggle="tab" data-bs-target="#junior-tab-pane" type="button" role="tab" aria-controls="junior-tab-pane" aria-selected="true">Junior</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="senior-tab-label" data-bs-toggle="tab" data-bs-target="#senior-tab" type="button" role="tab" aria-controls="senior-tab" aria-selected="false">Senior</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Year And Section</th>
+                                        <th scope="col">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="freshman_table">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Year And Section</th>
+                                        <th scope="col">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="sophomore_table">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="junior-tab-pane" role="tabpanel" aria-labelledby="junior-tab" tabindex="0">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Year And Section</th>
+                                        <th scope="col">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="junior_table">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="senior-tab" role="tabpanel" aria-labelledby="senior-tab-label" tabindex="0">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Year And Section</th>
+                                        <th scope="col">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="senior_table">
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">Name</th>
@@ -133,7 +207,7 @@ require_once 'lib/no_session_bypass.php';
                         <tbody id="unpaid_students">
 
                         </tbody>
-                    </table>
+                    </table> -->
                 </div>
 
             </div>
