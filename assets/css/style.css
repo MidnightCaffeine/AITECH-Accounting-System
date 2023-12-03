@@ -1189,3 +1189,8 @@ h6 {
 	display: inline-block;
 	margin: 100px auto;
 }
+
+.profile-picture{
+  width: 35vh;
+  height: 15vh;
+}

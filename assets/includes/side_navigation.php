@@ -7,15 +7,34 @@
                 echo 'collapsed';
             }
             ?>
-            " href="<?php if($_SESSION['userType'] == 1){
-                echo 'admin_dashboard.php';
-            }else{
-                echo 'home.php';
-            }?>">
+            " href="<?php if ($_SESSION['userType'] == 1) {
+                        echo 'admin_dashboard.php';
+                    } else {
+                        echo 'home.php';
+                    } ?>">
                 <i class="bi bi-grid"></i>
                 <span>Dashboard</span>
             </a>
         </li>
+
+        <?php
+        if ($_SESSION['userType'] == 1) {
+        ?>
+            <li class="nav-item">
+                <a class="nav-link
+            <?php
+            if ($page != 'Students') {
+                echo 'collapsed';
+            }
+            ?>
+            " href="students.php">
+                    <i class="bi bi-people"></i>
+                    <span>Students</span>
+                </a>
+            </li>
+        <?php
+        }
+        ?>
 
         <?php
         if ($_SESSION['userType'] == 1) {
@@ -83,7 +102,7 @@
             ?>
             " href="<?php if ($_SESSION['userType'] == 1) {
                         echo 'logs.php';
-                    }else{
+                    } else {
                         echo 'client_logs.php';
                     } ?>">
                 <i class="bi bi-file-earmark-richtext"></i>

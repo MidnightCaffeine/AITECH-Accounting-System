@@ -35,10 +35,12 @@ if (isset($_POST['login'])) {
 
             $id = $row['user_id'];
             $_SESSION['myid'] = $id;
+            $_SESSION['created'] = $row['created_at'];
+            $_SESSION['updated'] = $row['updated_at'];
             $_SESSION['userEmail'] = htmlspecialchars($row['email']);
             if (password_verify('1', $row['privilege'])) {
                 $_SESSION['userType'] = '1';
-            }else{
+            } else {
                 $_SESSION['userType'] = '3';
             }
 
@@ -46,12 +48,12 @@ if (isset($_POST['login'])) {
             if ($select->execute()) {
                 while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
                     $id = $row['student_id'];
-                    $firstname = htmlspecialchars($row["firstname"]);
-                    $middlename = htmlspecialchars($row["middlename"]);
-                    $lastname = htmlspecialchars($row["lastname"]);
+                    $firstname = ucfirst(htmlspecialchars($row["firstname"]));
+                    $middlename = ucfirst(htmlspecialchars($row["middlename"]));
+                    $lastname = ucfirst(htmlspecialchars($row["lastname"]));
                     $_SESSION['year_level'] = $row['year_group'];
                     $section = $row['section'];
-                    $_SESSION['firstname'] = $firstname;
+                    $_SESSION['firstname'] = ucfirst($firstname);
                 }
                 $_SESSION['student_id'] = $id;
                 $_SESSION['section'] = $section;
@@ -61,21 +63,16 @@ if (isset($_POST['login'])) {
                     $_SESSION['fullname'] = $firstname . " " . $lastname;
                 }
             }
+        } else {
+            echo "<span class='form-error'>Wrong password!</span>";
+            $combinationError = true;
         }
     }
-} else {
-    echo '<script type="text/javascript">
-            Swal.fire({
-                title: "Something went wrong!",
-                text: "Please try again",
-                icon: "error",
-            })
-            </script>';
 }
 ?>
 <script>
     $("#email, #password").removeClass(".input-error");
-
+    
     var position = "<?php echo $_SESSION['userType']; ?>";
     var loginErrorEmail = "<?php echo $loginErrorEmail; ?>";
     var loginErrorPassword = "<?php echo $loginErrorPassword; ?>";
@@ -88,13 +85,24 @@ if (isset($_POST['login'])) {
         $("#password").addClass("input-error");
     }
     if (combinationError == true) {
-
+        $("#password").addClass("input-error");
+        Swal.fire({
+            title: "Login Successful!",
+            text: "Redirecting to home page",
+            icon: "success",
+            timer: 2000,
+            timerProgressBar: true,
+            showConfirmButton: false
+        });
     }
 
     if (loginErrorEmail == false) {
         $("#email").removeClass(".input-error");
     }
     if (loginErrorPassword == false) {
+        $("#password").removeClass(".input-error");
+    }
+    if (combinationError == false) {
         $("#password").removeClass(".input-error");
     }
 
@@ -109,9 +117,9 @@ if (isset($_POST['login'])) {
         });
 
         setTimeout(function() {
-            if(position == 1){
+            if (position == 1) {
                 window.location.replace("admin_dashboard.php")
-            }else{
+            } else {
                 window.location.replace("home.php")
             } //will redirect to homepage
         }, 2000); //redirect after 2 seconds

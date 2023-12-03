@@ -108,7 +108,7 @@ if (isset($_SESSION['fullname'])) {
                         <a href="#!" class="forgot-password-link">Forgot password?</a>
                         <p class="login-wrapper-footer-text">
                             Don't have an account?
-                            <a data-target="#staticBackdrop" data-bs-toggle="modal" href="#staticBackdrop">Create an account</a>
+                            <a data-target="#addStudent" data-bs-toggle="modal" href="#addStudent">Create an account</a>
                         </p>
 
                     </div>
@@ -119,7 +119,7 @@ if (isset($_SESSION['fullname'])) {
     <script type="text/javascript" src="assets/js/bootstrap.bundle.min.js"></script>
 
 
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="addStudent" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
 

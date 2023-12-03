@@ -109,8 +109,9 @@ if (isset($_POST['signUp'])) {
     if (errorEmail == false && errorEmpty == false && errorPassword == false) {
         $("#register_firstname, #register_lastname, #register_middlename, #register_email, #register_password, #confirm_password").val("");
 
-        var myModalEl = document.getElementById('staticBackdrop');
+        var myModalEl = document.getElementById('addStudent');
         var modal = bootstrap.Modal.getInstance(myModalEl)
         modal.hide();
+        $('#studentsTable').DataTable().ajax.reload();
     }
 </script>
