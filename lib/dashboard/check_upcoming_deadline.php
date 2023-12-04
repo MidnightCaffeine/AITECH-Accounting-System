@@ -22,7 +22,7 @@ if ($feesWithTenDaysDeadline) {
         // Process each fee record (e.g., display or manipulate data)
         // Access data like $fee['column_name']
 
-        if ($_SESSION['userType'] != 1 && $fee['year_included'] == 5 || $fee['year_included'] == $_SESSION['year_level']) {
+        if ($_SESSION['userType'] == 1) {
 ?>
             <tr>
                 <th><?php echo $fee['fees_id'] ?></th>
@@ -30,9 +30,10 @@ if ($feesWithTenDaysDeadline) {
                 <th><?php echo $fee['fees_description'] ?></th>
                 <th><?php echo $fee['cost'] ?></th>
                 <th><?php echo date('jS M Y', strtotime($fee['deadline'])) ?></th>
+                <th><button type="button" id="<?php echo $fee['fees_id'] ?>" class="btn btn-primary view" name="<?php echo $fee['year_included'] ?>"><i class="bi bi-person-circle"></i> View Unpaid Students</button></th>
             </tr>
         <?php
-        } elseif ($_SESSION['userType'] == 1) {
+        } elseif ($_SESSION['userType'] != 1 && $fee['year_included'] == 5 || $fee['year_included'] == $_SESSION['year_level']) {
         ?>
             <tr>
                 <th><?php echo $fee['fees_id'] ?></th>
@@ -40,7 +41,6 @@ if ($feesWithTenDaysDeadline) {
                 <th><?php echo $fee['fees_description'] ?></th>
                 <th><?php echo $fee['cost'] ?></th>
                 <th><?php echo date('jS M Y', strtotime($fee['deadline'])) ?></th>
-                <th><button type="button" id="<?php echo $fee['fees_id'] ?>" class="btn btn-primary view" name="<?php echo $fee['year_included'] ?>"><i class="bi bi-person-circle"></i> View Unpaid Students</button></th>
             </tr>
     <?php
         }

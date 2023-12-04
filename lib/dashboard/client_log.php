@@ -5,7 +5,7 @@ date_default_timezone_set('Asia/Manila');
 include_once '../databaseHandler/connection.php';
 require_once '../../assets/includes/time_relative.php';
 
-$id = $_SESSION['student_id'];
+$id = $_SESSION['myid'];
 
 $statement = $pdo->prepare(
     "SELECT * FROM logs WHERE user_id = $id  ORDER BY log_id DESC LIMIT 6"

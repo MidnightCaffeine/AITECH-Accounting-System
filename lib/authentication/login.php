@@ -10,6 +10,7 @@ if (isset($_POST['login'])) {
     $loginErrorEmail = false;
     $loginErrorPassword = false;
     $combinationError = false;
+    $notVerified = false;
 
     $select = $pdo->prepare("SELECT email FROM users WHERE email = '$email'");
     $select->execute();
@@ -38,29 +39,39 @@ if (isset($_POST['login'])) {
             $_SESSION['created'] = $row['created_at'];
             $_SESSION['updated'] = $row['updated_at'];
             $_SESSION['userEmail'] = htmlspecialchars($row['email']);
+            $otp = $row['verification'];
+            $_SESSION['otp'] = $row['verification'];
             if (password_verify('1', $row['privilege'])) {
                 $_SESSION['userType'] = '1';
+                $_SESSION['fullname'] = 'Administrator';
+                $_SESSION['firstname'] = 'Admin';
+                $_SESSION['status']  = 1;
             } else {
                 $_SESSION['userType'] = '3';
-            }
+                $select = $pdo->prepare("SELECT * FROM students WHERE user_id = '$id'");
+                if ($select->execute()) {
+                    while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
+                        $id = $row['student_id'];
+                        $firstname = ucfirst(htmlspecialchars($row["firstname"]));
+                        $middlename = ucfirst(htmlspecialchars($row["middlename"]));
+                        $lastname = ucfirst(htmlspecialchars($row["lastname"]));
+                        $_SESSION['year_level'] = $row['year_group'];
+                        $section = $row['section'];
+                        $_SESSION['firstname'] = ucfirst($firstname);
+                        $status = $row['status'];
+                        $_SESSION['status'] = $row['status'];
+                    }
+                    $_SESSION['student_id'] = $id;
+                    $_SESSION['section'] = $section;
+                    if ($middlename != null) {
+                        $_SESSION['fullname'] = $firstname . " " . $middlename . " " . $lastname;
+                    } else {
+                        $_SESSION['fullname'] = $firstname . " " . $lastname;
+                    }
 
-            $select = $pdo->prepare("SELECT * FROM students WHERE user_id = '$id'");
-            if ($select->execute()) {
-                while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
-                    $id = $row['student_id'];
-                    $firstname = ucfirst(htmlspecialchars($row["firstname"]));
-                    $middlename = ucfirst(htmlspecialchars($row["middlename"]));
-                    $lastname = ucfirst(htmlspecialchars($row["lastname"]));
-                    $_SESSION['year_level'] = $row['year_group'];
-                    $section = $row['section'];
-                    $_SESSION['firstname'] = ucfirst($firstname);
-                }
-                $_SESSION['student_id'] = $id;
-                $_SESSION['section'] = $section;
-                if ($middlename != null) {
-                    $_SESSION['fullname'] = $firstname . " " . $middlename . " " . $lastname;
-                } else {
-                    $_SESSION['fullname'] = $firstname . " " . $lastname;
+                    if ($status != 1) {
+                        $notVerified = true;
+                    }
                 }
             }
         } else {
@@ -72,11 +83,12 @@ if (isset($_POST['login'])) {
 ?>
 <script>
     $("#email, #password").removeClass(".input-error");
-    
+
     var position = "<?php echo $_SESSION['userType']; ?>";
     var loginErrorEmail = "<?php echo $loginErrorEmail; ?>";
     var loginErrorPassword = "<?php echo $loginErrorPassword; ?>";
     var combinationError = "<?php echo $combinationError; ?>";
+    var notVerified = "<?php echo $notVerified; ?>";
 
     if (loginErrorEmail == true) {
         $("#email").addClass("input-error");
@@ -86,14 +98,6 @@ if (isset($_POST['login'])) {
     }
     if (combinationError == true) {
         $("#password").addClass("input-error");
-        Swal.fire({
-            title: "Login Successful!",
-            text: "Redirecting to home page",
-            icon: "success",
-            timer: 2000,
-            timerProgressBar: true,
-            showConfirmButton: false
-        });
     }
 
     if (loginErrorEmail == false) {
@@ -106,7 +110,11 @@ if (isset($_POST['login'])) {
         $("#password").removeClass(".input-error");
     }
 
-    if (loginErrorEmail == false && loginErrorPassword == false && combinationError == false) {
+    if (notVerified == true) {
+        $("#confirm").modal('show');
+    }
+
+    if (loginErrorEmail == false && loginErrorPassword == false && combinationError == false && notVerified == false) {
         Swal.fire({
             title: "Login Successful!",
             text: "Redirecting to home page",

@@ -55,12 +55,7 @@ if (isset($_SESSION['fullname'])) {
 
                 });
             });
-        });
 
-    </script>
-
-    <script>
-        $(document).ready(function() {
             $('#login-form').submit(function(event) {
                 event.preventDefault();
 
@@ -75,8 +70,22 @@ if (isset($_SESSION['fullname'])) {
                 });
 
             });
+
+            $('#confirmation_form').submit(function(event) {
+                event.preventDefault();
+
+                var confirmation_code = $('#confirmation').val();
+                var confirm_submit = $('#confirmSubmit').val();
+
+                $(".verification_message").load("lib/authentication/confirmation.php", {
+                    confirmation_code,
+                    confirm_submit
+                });
+
+            });
         });
     </script>
+
 </head>
 
 <body>
@@ -129,9 +138,8 @@ if (isset($_SESSION['fullname'])) {
                 </div>
                 <div class="modal-body">
                     <form id="register" action="lib/authentication/register.php" method="post">
-                        <p id="message"></p>
+                        <p class="form-message"></p>
                         <div class="row g-2">
-                            <p class="form-message"></p>
                             <div class="col-sm-6">
                                 <div class="form-floating mb-3">
                                     <input type="text" class="form-control" id="register_firstname" name="register_firstname" placeholder="Firstname">
@@ -187,6 +195,34 @@ if (isset($_SESSION['fullname'])) {
                         <div class="col-md-12 text-center block">
                             <button type="submit" name="signUp" id="signUp" class="btn btn-secondary w-100">Sign-Up</button>
                         </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Email Confirmation</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form autocomplete="off" id="confirmation_form" action="lib/authentication/confirmation.php" method="post">
+                        <input autocomplete="false" name="hidden" type="text" style="display:none;">
+                        <h4>Since this is your first time login you need to confirm your e-mail to proceed.</h3>
+                            <p class="verification_message mb-2 mt-2"></p>
+                            <div class="row g-2">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="confirmation" name="confirmation" placeholder="confirmation">
+                                    <label for="confirmation">Confirmation Code</label>
+                                </div>
+                                <div class="col-md-12 text-center block">
+                                    <button type="submit" name="confirmSubmit" id="confirmSubmit" class="btn btn-success w-100">Verify Email</button>
+                                </div>
                     </form>
                 </div>
 

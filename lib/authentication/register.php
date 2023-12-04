@@ -1,10 +1,21 @@
 <?php
+
+use PHPMailer\PHPMailer\PHPMailer;
+
 require_once '../databaseHandler/connection.php';
 
+require_once 'PHPMailer/src/Exception.php';
+require_once 'PHPMailer/src/PHPMailer.php';
+require_once 'PHPMailer/src/SMTP.php';
+require_once '../../assets/includes/time_relative.php';
+session_start();
+
+$mail = new PHPMailer(true);
+
 if (isset($_POST['signUp'])) {
-    $register_firstname = $_POST['register_firstname'];
-    $register_lastname = $_POST['register_lastname'];
-    $register_middlename = $_POST['register_middlename'];
+    $register_firstname = ucfirst(htmlspecialchars($_POST['register_firstname']));
+    $register_lastname = ucfirst(htmlspecialchars($_POST['register_lastname']));
+    $register_middlename = ucfirst(htmlspecialchars($_POST['register_middlename']));
     $register_email = $_POST['register_email'];
     $year_group = $_POST['year_group'];
     $section = $_POST['section'];
@@ -12,6 +23,11 @@ if (isset($_POST['signUp'])) {
     $confirm_password = $_POST['confirm_password'];
     $hashed_password = password_hash($register_password, PASSWORD_DEFAULT);
     $position = 3;
+    $otp = generateNumericOTP(6);
+    $recipient = $register_email;
+    $subject = 'Confirmation Code';
+
+    $fullname = $register_firstname . " " . $register_middlename . " " . $register_lastname;
 
     $errorEmpty = false;
     $errorEmail = false;
@@ -48,11 +64,12 @@ if (isset($_POST['signUp'])) {
 
     // inserts the data to the database
     else {
-        $insert = $pdo->prepare("INSERT INTO users(email, password, privilege) VALUES(:email, :password, :privilege)");
+        $insert = $pdo->prepare("INSERT INTO users(email, password, privilege,verification) VALUES(:email, :password, :privilege, :otp)");
 
         $insert->bindparam('email', $register_email);
         $insert->bindparam('password', $hashed_password);
         $insert->bindparam('privilege', $position);
+        $insert->bindparam('otp', $otp);
 
         if ($insert->execute()) {
 
@@ -62,26 +79,39 @@ if (isset($_POST['signUp'])) {
                 $id = $row['user_id'];
             }
 
-            $insert = $pdo->prepare("INSERT INTO students (user_id, firstname, middlename, lastname, year_group, section) VALUES(:id, :firstname, :middlename, :lastname, :year_group, :section)");
+            $insertStudent = $pdo->prepare("INSERT INTO students (user_id, firstname, middlename, lastname, year_group, section) VALUES(:id, :firstname, :middlename, :lastname, :year_group, :section)");
 
-            $insert->bindparam('id', $id);
-            $insert->bindparam('firstname', $register_firstname);
-            $insert->bindparam('middlename', $register_middlename);
-            $insert->bindparam('lastname', $register_lastname);
-            $insert->bindparam('year_group', $year_group);
-            $insert->bindparam('section', $section);
+            $insertStudent->bindparam('id', $id);
+            $insertStudent->bindparam('firstname', $register_firstname);
+            $insertStudent->bindparam('middlename', $register_middlename);
+            $insertStudent->bindparam('lastname', $register_lastname);
+            $insertStudent->bindparam('year_group', $year_group);
+            $insertStudent->bindparam('section', $section);
 
-            if ($insert->execute()) {
-                echo '<script type="text/javascript">
-                Swal.fire({
-                    title: "Registration Successful!",
-                    text: "You can login to your account now",
-                    icon: "success",
-                    timer: 2000,
-                    timerProgressBar: true,
-                    showConfirmButton: false
-                })
-                </script>';
+            try {
+                $mail->IsSMTP();
+                $mail->Host = "smtp.gmail.com";
+                $mail->SMTPAuth = true;
+
+                $mail->Username = "midnightcoffee014@gmail.com";
+                $mail->Password = "tpgcshdmagysdbla";
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = '587';
+
+                $mail->SetFrom('midnightcoffee014@gmail.com');
+                $mail->AddAddress($recipient);
+
+                $mail->IsHTML(true);
+                $mail->Subject = $subject;
+
+                $mail->Body = '<body data-new-gr-c-s-loaded="14.1141.0" style="width: 100%; font-family: open sans, helvetica neue, helvetica, arial, sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; padding: 0; margin: 0;"><div dir="ltr" class="es-wrapper-color" lang="en" style="background-color: #eeeeee"><table class="es-wrapper" width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;padding: 0;margin: 0;width: 100%;height: 100%;background-repeat: repeat;background-position: center top;background-color: #eeeeee;"><tr style="border-collapse: collapse"><td valign="top" style="padding: 0; margin: 0"><table class="es-content" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;table-layout: fixed !important;width: 100%;"><tr style="border-collapse: collapse"></tr> <tr style="border-collapse: collapse"><td align="center" style="padding: 0; margin: 0"><table class="es-header-body" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;background-color: #FDA63A;width: 600px;" cellspacing="0" cellpadding="0" bgcolor="#044767" align="center"><tr style="border-collapse: collapse"><td align="left" style="margin: 0;padding-top: 35px;padding-left: 35px;padding-right: 35px;padding-bottom: 40px;"><table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;"><tr style="border-collapse: collapse"><td valign="top" align="center" style="padding: 0; margin: 0; width: 530px"><table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;"><tr style="border-collapse: collapse">   <td class="es-m-txt-c" align="center" style="padding: 0; margin: 0"><h1 style="margin: 0;line-height: 36px;mso-line-height-rule: exactly;font-family: open sans, helvetica neue,helvetica, arial, sans-serif;font-size: 36px;font-style: normal;font-weight: bold;color: #ffffff;">AITECHS</h1></td></tr></table></td></tr></table></td></tr></table></td></tr></table><table class="es-content" cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;table-layout: fixed !important;width: 100%;"><tr style="border-collapse: collapse"><td align="center" style="padding: 0; margin: 0"><table class="es-content-body" cellspacing="0" cellpadding="0" bgcolor="#ffffff" align="center" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;background-color: #ffffff;width: 600px;"><tr style="border-collapse: collapse"><td align="left" style="margin: 0;padding-bottom: 25px;padding-top: 35px;padding-left: 35px;padding-right: 35px;"><table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;"><tr style="border-collapse: collapse"><td valign="top" align="center" style="padding: 0; margin: 0; width: 530px"><table width="100%" cellspacing="0" cellpadding="0"  style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;"><tr style="border-collapse: collapse"><td align="left" style="padding: 0;margin: 0;padding-bottom: 5px;padding-top: 20px;"><h3 style="margin: 0;line-height: 22px;mso-line-height-rule: exactly;font-family: open sans, helvetica neue,helvetica, arial, sans-serif;font-size: 18px;font-style: normal;font-weight: bold;color: #333333;">Hello ' . $fullname . ',<br /></h3></td></tr><tr style="border-collapse: collapse"><td align="left" style="padding: 0;margin: 0;padding-bottom: 10px;padding-top: 15px;">   <p style="margin: 0;-webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;font-family: open sans, helvetica neue,helvetica, arial, sans-serif;line-height: 24px;color: #777777;font-size: 16px;"><i></i>Dear ' . $fullname . ', the confirmation code to confirm your email for AITECHS Accounting System is (' . $otp . ').<i></i></p></td></tr><tr style="border-collapse: collapse"><td align="left" style="padding: 0;margin: 0;padding-top: 5px;"><p style="margin: 0;-webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;font-family: open sans, helvetica neue,helvetica, arial, sans-serif;     line-height: 24px;color: #777777;font-size: 16px;" >We are committed to providing you with the best possible solutions and ensuring that you have a positive experience with our system. Thank you for your continued support, and we look forward to serving you in the future. </p></td> </tr></table></td></tr></table>    </td></tr></table></td></tr></table><table cellpadding="0" cellspacing="0" class="es-footer"align="center" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;table-layout: fixed !important;width: 100%;background-color: transparent;background-repeat: repeat;      background-position: center top;"><tr style="border-collapse: collapse"><td align="center" style="padding: 0; margin: 0"><table  class="es-footer-body"  cellspacing="0" cellpadding="0" align="center" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;    background-color: #ffffff;width: 600px;"><tr style="border-collapse: collapse"><td align="left"style="margin: 0;padding-top: 35px;padding-left: 35px;padding-right: 35px;padding-bottom: 40px;"><table width="100%"cellspacing="0"cellpadding="0"style="  mso-table-lspace: 0pt;  mso-table-rspace: 0pt;  border-collapse: collapse;  border-spacing: 0px;"><tr style="border-collapse: collapse"><td valign="top" align="center" style="padding: 0; margin: 0; width: 530px"><table width="100%" cellspacing="0" cellpadding="0" style="mso-table-lspace: 0pt;mso-table-rspace: 0pt;border-collapse: collapse;border-spacing: 0px;"><tr style="border-collapse: collapse"><td align="center" style="padding: 0;margin: 0;padding-bottom: 15px;font-size: 0;"></td></tr><tr style="border-collapse: collapse"><td align="center" style="padding: 0;margin: 0;padding-bottom: 35px;"> <p style="margin: 0;-webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;font-family: open sans, helvetica neue,helvetica, arial, sans-serif;line-height: 21px;color: #333333;font-size: 14px;   " >   <b>School of Information Technology</b> </p> <p style="margin: 0;-webkit-text-size-adjust: none;-ms-text-size-adjust: none;mso-line-height-rule: exactly;font-family: open sans, helvetica neue,helvetica, arial, sans-serif;line-height: 21px;color: #333333;font-size: 14px;" ><b></b><b></b>AITECHS Accounting System<br/></p></td></tr></table></td></tr></table></td></tr></table></td></tr></table></td></tr></table></div></body>';
+
+                if ($insertStudent->execute()) {
+                    $mail->send();
+                }
+            } catch (Exception $e) {
+
+                echo $mail->ErrorInfo;
             }
         }
     }
@@ -108,6 +138,15 @@ if (isset($_POST['signUp'])) {
     }
     if (errorEmail == false && errorEmpty == false && errorPassword == false) {
         $("#register_firstname, #register_lastname, #register_middlename, #register_email, #register_password, #confirm_password").val("");
+
+        Swal.fire({
+            title: "Registration Successful!",
+            text: "The confirmation Code is Sent on Your E-mail.",
+            icon: "success",
+            timer: 2000,
+            timerProgressBar: true,
+            showConfirmButton: false
+        });
 
         var myModalEl = document.getElementById('addStudent');
         var modal = bootstrap.Modal.getInstance(myModalEl)
