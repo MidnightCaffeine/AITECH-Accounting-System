@@ -27,7 +27,7 @@ if (count($result) > 0) {
                 <i class='bi bi-circle-fill activity-badge text-success align-self-start'></i>
             </div>
             <div class="col-md-7">
-                <div class="activity-content"><strong><?php echo $row['user_email']; ?> </strong><?php echo $row['action']; ?></div>
+                <div class="activity-content"><strong>You </strong><?php echo $row['action']; ?></div>
             </div>
         </div>
     <?php

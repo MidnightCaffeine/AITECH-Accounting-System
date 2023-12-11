@@ -6,7 +6,7 @@ include_once '../databaseHandler/connection.php';
 require_once '../../assets/includes/time_relative.php';
 
 $log_count = $_POST['datas'][0];
-$id = $_SESSION['student_id'];
+$id = $_SESSION['myid'];;
 
 $statement = $pdo->prepare(
     "SELECT * FROM logs WHERE user_id = $id ORDER BY log_id DESC LIMIT $log_count"
@@ -23,7 +23,7 @@ foreach ($result as $row) {
             </div>
         </div>
         <div class="col-md-9">
-            <div class="activity-content"><strong><?php echo $row['user_email']; ?> </strong><?php echo $row['action']; ?></div>
+            <div class="activity-content"><strong>You </strong><?php echo $row['action']; ?></div>
         </div>
     </div>
 <?php

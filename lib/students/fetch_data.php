@@ -60,6 +60,14 @@ $columns = array(
             }
             return $d;
         }
+    ),
+    array(
+        'db'        => 'user_id',
+        'dt'        => 6,
+        'formatter' => function ($d, $row) {
+            $d = '<button type="button" id="'. $d . '" class="btn btn-danger delete" name="delete" data-toggle="tooltip" data-placement="bottom" title="Delete Student"><i class="bi bi-trash"></i></button>';
+            return $d;
+        }
     )
 
 );

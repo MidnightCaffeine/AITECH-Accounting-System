@@ -78,7 +78,7 @@ require_once 'lib/no_session_bypass.php';
                 <div class="col-lg-4">
 
                     <div class="card">
-                        <div class="filter">
+                        <!-- <div class="filter">
                             <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
                                 <li class="dropdown-header text-start">
@@ -88,7 +88,7 @@ require_once 'lib/no_session_bypass.php';
                                 <li><a class="dropdown-item" href="#">This Month</a></li>
                                 <li><a class="dropdown-item" href="#">This Year</a></li>
                             </ul>
-                        </div>
+                        </div> -->
                         <div class="card-body">
                             <h5 class="card-title">Recent Activity <span>| Today</span></h5>
                             <div id="activity" class="activity">
@@ -213,7 +213,7 @@ require_once 'lib/no_session_bypass.php';
             </div>
         </div>
     </div>
-
+    <script src="assets/js/echarts.min.js"></script>
 </body>
 
 </html>

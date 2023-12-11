@@ -42,6 +42,7 @@ require_once 'lib/no_session_bypass.php';
                         <th>Year</th>
                         <th>Section</th>
                         <th>Status</th>
+                        <th>Delete</th>
                     </tr>
                 </thead>
 

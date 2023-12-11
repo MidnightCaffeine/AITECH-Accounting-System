@@ -1194,3 +1194,9 @@ h6 {
   width: 35vh;
   height: 15vh;
 }
+
+.background-active{
+  border-radius: 3px;
+  background: #0f93df;
+  color: white;
+}

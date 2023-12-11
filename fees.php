@@ -9,6 +9,9 @@ require_once 'lib/no_session_bypass.php';
 <!DOCTYPE html>
 <html lang="en">
 <?php include_once 'assets/includes/head.php'; ?>
+<script>
+    var stud_count;
+</script>
 <script type="text/javascript" src="assets/js/fees.js"></script>
 </head>
 
@@ -46,7 +49,6 @@ require_once 'lib/no_session_bypass.php';
                 </thead>
 
             </table>
-
         </section>
     </main>
 
@@ -55,7 +57,7 @@ require_once 'lib/no_session_bypass.php';
     require_once 'assets/includes/script.php';
     ?>
 
-    //add fees modal
+    <!-- //add fees modal -->
     <div class="modal fade" id="addFees" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
@@ -83,6 +85,7 @@ require_once 'lib/no_session_bypass.php';
                                 <option value="2">Sophomore (2nd year)</option>
                                 <option value="3">Junior (3rd year)</option>
                                 <option value="4">Senior (4th year)</option>
+                                <option value="6">Irregular</option>
                             </select>
                             <label for="fees_year">Year Group</label>
                         </div>
@@ -110,7 +113,7 @@ require_once 'lib/no_session_bypass.php';
         </div>
     </div>
 
-    //edit fees modal
+    <!-- edit fees modal -->
 
     <div class="modal fade" id="editFees" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -139,6 +142,7 @@ require_once 'lib/no_session_bypass.php';
                                 <option value="2">Sophomore (2nd year)</option>
                                 <option value="3">Junior (3rd year)</option>
                                 <option value="4">Senior (4th year)</option>
+                                <option value="6">Irregular</option>
                             </select>
                             <label for="edit_fees_year">Year Group</label>
                         </div>
@@ -172,11 +176,148 @@ require_once 'lib/no_session_bypass.php';
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="paid">Paid Students</h1>
+                    <h1 class="modal-title fs-5" id="paid_title">Paid Students</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-striped">
+
+                    <div id="statistics"></div>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Freshman</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Sophomore</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="junior-tab" data-bs-toggle="tab" data-bs-target="#junior-tab-pane" type="button" role="tab" aria-controls="junior-tab-pane" aria-selected="true">Junior</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="senior-tab-label" data-bs-toggle="tab" data-bs-target="#senior-tab" type="button" role="tab" aria-controls="senior-tab" aria-selected="false">Senior</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                            <div class="paids">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Year And Section</th>
+                                            <th scope="col">Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="freshman_paid">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="unpaid">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Year And Section</th>
+                                            <th scope="col">Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="freshman_unpaid">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                            <div class="paids">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Year And Section</th>
+                                            <th scope="col">Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sophomore_paid">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="unpaid">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Year And Section</th>
+                                            <th scope="col">Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="sophomore_unpaid">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="junior-tab-pane" role="tabpanel" aria-labelledby="junior-tab" tabindex="0">
+                            <div class="paids">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Year And Section</th>
+                                            <th scope="col">Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="junior_paid">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="unpaid">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Year And Section</th>
+                                            <th scope="col">Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="junior_unpaid">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="senior-tab" role="tabpanel" aria-labelledby="senior-tab-label" tabindex="0">
+                            <div class="paids">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Year And Section</th>
+                                            <th scope="col">Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="senior_paid">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="unpaid">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Year And Section</th>
+                                            <th scope="col">Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="senior_unpaid">
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <table class="table table-striped">
                         <thead>
                             <tr>
                                 <th scope="col">Name</th>
@@ -187,7 +328,7 @@ require_once 'lib/no_session_bypass.php';
                         <tbody id="paid_students">
 
                         </tbody>
-                    </table>
+                    </table> -->
                 </div>
 
             </div>

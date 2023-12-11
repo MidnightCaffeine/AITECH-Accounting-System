@@ -3,9 +3,10 @@ $page = 'Logs';
 require_once 'lib/databaseHandler/connection.php';
 require_once 'lib/init.php';
 require_once 'lib/no_session_bypass.php';
+date_default_timezone_set('Asia/Manila');
 require_once 'assets/includes/time_relative.php';
 
-$id = $_SESSION['student_id'];
+$id = $_SESSION['myid'];
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +68,7 @@ $id = $_SESSION['student_id'];
                                         </div>
                                     </div>
                                     <div class="col-md-9">
-                                        <div class="activity-content"><strong><?php echo $row['user_email']; ?> </strong><?php echo $row['action']; ?></div>
+                                        <div class="activity-content"><strong>You </strong><?php echo $row['action']; ?></div>
                                     </div>
                                 </div>
                             <?php

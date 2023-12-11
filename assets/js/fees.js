@@ -1,11 +1,23 @@
 $(document).ready(function () {
-  $(document).ready(function () {
-    $("#feesTable").DataTable({
-      processing: true,
-      serverSide: true,
-      ajax: "lib/fees/fetch_data.php",
-    });
+  var student_count;
+
+  $("#feesTable").DataTable({
+    processing: true,
+    serverSide: true,
+    ajax: "lib/fees/fetch_data.php",
   });
+
+  // $.ajax({
+  //   url: "lib/fees/count_students.php",
+  //   method: "POST",
+  //   data: {
+  //     get_count
+  //   },
+  //   dataType: "json",
+  //   success: function (data) {
+  //     student_count = data.students;
+  //   },
+  // });
 
   $("#addFeesForm").submit(function (event) {
     event.preventDefault();
@@ -107,10 +119,51 @@ $(document).ready(function () {
   });
 
   $('[data-toggle="tooltip"]').tooltip();
+
   $(document).on("click", ".view", function () {
     var fees_id = $(this).attr("id");
-
+    $(".unpaid").hide();
     $("#paidStudents").modal("show");
-    $("#paid_students" ).load( "lib/fees/view_paid.php", { "datas[]": [ fees_id] } );
+
+    $("#statistics").load("lib/fees/load_stats.php", {
+      "datas[]": [fees_id],
+    });
+
+    $("#freshman_paid").load("lib/fees/view_paid.php", {
+      "datas[]": [fees_id],
+    });
+    $("#sophomore_paid").load("lib/fees/view_sophomore_paid.php", {
+      "datas[]": [fees_id],
+    });
+    $("#junior_paid").load("lib/fees/junior_paid.php", {
+      "datas[]": [fees_id],
+    });
+    $("#senior_paid").load("lib/fees/senior_paid.php", {
+      "datas[]": [fees_id],
+    });
+
+    $("#freshman_unpaid").load("lib/fees/fresh_unpaid.php", {
+      "datas[]": [fees_id],
+    });
+    $("#sophomore_unpaid").load("lib/fees/sophomore_unpaid.php", {
+      "datas[]": [fees_id],
+    });
+    $("#junior_unpaid").load("lib/fees/junior_unpaid.php", {
+      "datas[]": [fees_id],
+    });
+  });
+
+  $(document).on("click", ".paid_tab", function () {
+    $(".unpaid_tab").removeClass("background-active");
+    $(".paid_tab").addClass("background-active");
+    $(".unpaid").hide();
+    $(".paids").show();
+  });
+
+  $(document).on("click", ".unpaid_tab", function () {
+    $(".paid_tab").removeClass("background-active");
+    $(".unpaid_tab").addClass("background-active");
+    $(".unpaid").show();
+    $(".paids").hide();
   });
 });

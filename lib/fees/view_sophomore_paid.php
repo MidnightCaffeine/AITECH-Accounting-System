@@ -24,7 +24,7 @@ if (isset($_POST['datas'][0])) {
         foreach ($result as $row) {
             $year = $row['year_level'];
             if (!empty($result)) {
-                if ($year == 1) {
+                if ($year == 2) {
 ?>
                     <tr>
                         <th><?php echo $row['fullname']; ?></th>

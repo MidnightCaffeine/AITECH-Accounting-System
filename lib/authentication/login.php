@@ -35,7 +35,7 @@ if (isset($_POST['login'])) {
         if (password_verify($password, $row['password'])) {
 
             $id = $row['user_id'];
-            $_SESSION['myid'] = $id;
+            $_SESSION['myid'] = $row['user_id'];
             $_SESSION['created'] = $row['created_at'];
             $_SESSION['updated'] = $row['updated_at'];
             $_SESSION['userEmail'] = htmlspecialchars($row['email']);
