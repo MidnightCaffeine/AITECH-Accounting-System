@@ -79,12 +79,12 @@ if (isset($_POST['fees_id'])) {
             $mail->Host = "smtp.gmail.com";
             $mail->SMTPAuth = true;
 
-            $mail->Username = "midnightcoffee014@gmail.com";
-            $mail->Password = "tpgcshdmagysdbla";
+            $mail->Username = "Aitech1122@gmail.com";
+            $mail->Password = "kdebvodkiqsrdulj";
             $mail->SMTPSecure = 'tls';
             $mail->Port = '587';
 
-            $mail->SetFrom('midnightcoffee014@gmail.com');
+            $mail->SetFrom('Aitech1122@gmail.com');
             $mail->AddAddress($recipient);
 
             $mail->IsHTML(true);
