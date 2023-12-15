@@ -13,7 +13,7 @@
     <tbody class="table-group-divider">
 
         <?php
-        $select = $pdo->prepare("SELECT * FROM fees_list WHERE year_included = '$year_level' OR  year_included = 5 ORDER BY fees_id ASC");
+        $select = $pdo->prepare("SELECT * FROM fees_list WHERE year_included = '$year_level' OR  year_included = 'All' ORDER BY fees_id ASC");
         $select->execute();
 
         while ($row = $select->fetch(PDO::FETCH_ASSOC)) {

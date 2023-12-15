@@ -38,7 +38,7 @@ if (isset($_POST['datas'][0])) {
             </div>
             <div class="row text-center ">
                 <div class="col-6 paid_tab pt-2 background-active mx-2">
-                    <h5><i class="bi bi-file-person-fill"></i> PAID: <span id="paid_studs"><?php echo $paid_count; ?> <?php echo $paid_percent."%"; ?></span></h5>
+                    <h5><i class="bi bi-file-person-fill"></i> PAID: <span id="paid_studs"><?php echo $paid_count; ?></span></h5>
                 </div>
                 <div class="col-5 unpaid_tab pt-2 mx-2">
                     <h5><i class="bi bi-file-person-fill"></i> UNPAID: <span id="unpaid_studs"><?php echo $unpaid; ?></span></h5>
