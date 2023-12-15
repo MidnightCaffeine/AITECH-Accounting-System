@@ -14,7 +14,7 @@ if (isset($_POST['datas'][0])) {
         $years = $row["year_included"];
     }
 
-    if ($years == 5) {
+    if ($years == "All") {
         $query = "SELECT status FROM students";
     } else {
         $query = "SELECT status FROM students WHERE year_group = $years";
@@ -29,13 +29,16 @@ if (isset($_POST['datas'][0])) {
 
         $unpaid = $student_count - $paid_count;
 
-
+        $paid_percent = ($paid_count/$student_count)*100;
         // if ($year == 1) {
 ?>
         <div class="mb-3 align-content-center">
+            <div>
+            <h5>Total Percent of Paid Students: <?php echo $paid_percent."%"; ?></h5>
+            </div>
             <div class="row text-center ">
                 <div class="col-6 paid_tab pt-2 background-active mx-2">
-                    <h5><i class="bi bi-file-person-fill"></i> PAID: <span id="paid_studs"><?php echo $paid_count; ?></span></h5>
+                    <h5><i class="bi bi-file-person-fill"></i> PAID: <span id="paid_studs"><?php echo $paid_count; ?> <?php echo $paid_percent."%"; ?></span></h5>
                 </div>
                 <div class="col-5 unpaid_tab pt-2 mx-2">
                     <h5><i class="bi bi-file-person-fill"></i> UNPAID: <span id="unpaid_studs"><?php echo $unpaid; ?></span></h5>

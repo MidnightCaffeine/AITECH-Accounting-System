@@ -22,33 +22,8 @@ $columns = array(
     array('db' => 'firstname', 'dt' => 0),
     array('db' => 'middlename',  'dt' => 1),
     array('db' => 'lastname',  'dt' => 2),
-    array(
-        'db'        => 'year_group',
-        'dt'        => 3,
-        'formatter' => function ($d, $row) {
-            if ($d == 6) {
-                $d = 'Irregular';
-            } elseif ($d == 1) {
-                $d = '1st Year';
-            } elseif ($d == 2) {
-                $d = '2nd Year';
-            } elseif ($d == 3) {
-                $d = '3rd Year';
-            } elseif ($d == 4) {
-                $d = '4th Year';
-            }
-            return $d;
-        }
-    ),
-    array(
-        'db'        => 'section',
-        'dt'        => 4,
-        'formatter' => function ($d, $row) {
-            $sections = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
-            $d = $sections[$d - 1];
-            return $d;
-        }
-    ),
+    array('db' => 'year_group',  'dt' => 3),
+    array('db' => 'section',  'dt' => 4),
     array(
         'db'        => 'status',
         'dt'        => 5,

@@ -24,11 +24,11 @@ if (isset($_POST['datas'][0])) {
         foreach ($result as $row) {
             $year = $row['year_level'];
             if (!empty($result)) {
-                if ($year == 2) {
+                if ($year == "2nd Year") {
 ?>
                     <tr>
                         <th><?php echo $row['fullname']; ?></th>
-                        <th><?php echo  $row['year_level'] . " - " . $sections[$row['section'] - 1]; ?></th>
+                        <th><?php echo  $row['year_level'] . " - " . $row['section']; ?></th>
                         <th><?php echo  $fee_cost - $row['cost']; ?></th>
                     </tr>
 

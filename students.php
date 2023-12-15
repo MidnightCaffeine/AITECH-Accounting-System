@@ -93,25 +93,25 @@ require_once 'lib/no_session_bypass.php';
                         </div>
                         <div class="form-floating mb-3">
                             <select class="form-select" id="year_group">
-                                <option value="1">Freshman (1st year)</option>
-                                <option value="2">Sophomore (2nd year)</option>
-                                <option value="3">Junior (3rd year)</option>
-                                <option value="4">Senior (4th year)</option>
-                                <option value="6">Irregular</option>
+                                <option value="1st Year">Freshman (1st year)</option>
+                                <option value="2nd Year">Sophomore (2nd year)</option>
+                                <option value="3rd Year">Junior (3rd year)</option>
+                                <option value="4th Year">Senior (4th year)</option>
+                                <option value="Irregular">Irregular</option>
                             </select>
                             <label for="year_group">Year Group</label>
                         </div>
                         <div class="form-floating mb-3">
                             <select class="form-select" id="section">
-                                <option value="1">A</option>
-                                <option value="2">B</option>
-                                <option value="3">C</option>
-                                <option value="4">D</option>
-                                <option value="5">E</option>
-                                <option value="6">F</option>
-                                <option value="7">G</option>
-                                <option value="8">H</option>
-                                <option value="9">I</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                                <option value="E">E</option>
+                                <option value="F">F</option>
+                                <option value="G">G</option>
+                                <option value="H">H</option>
+                                <option value="I">I</option>
                             </select>
                             <label for="section">Section</label>
                         </div>

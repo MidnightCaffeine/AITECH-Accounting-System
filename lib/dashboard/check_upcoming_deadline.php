@@ -33,7 +33,7 @@ if ($feesWithTenDaysDeadline) {
                 <th><button type="button" id="<?php echo $fee['fees_id'] ?>" class="btn btn-primary view" name="<?php echo $fee['year_included'] ?>"><i class="bi bi-person-circle"></i> View Unpaid Students</button></th>
             </tr>
         <?php
-        } elseif ($_SESSION['userType'] != 1 && $fee['year_included'] == 5 || $fee['year_included'] == $_SESSION['year_level']) {
+        } elseif ($_SESSION['userType'] != 1 && $fee['year_included'] == "All" || $fee['year_included'] == $_SESSION['year_level']) {
         ?>
             <tr>
                 <th><?php echo $fee['fees_id'] ?></th>

@@ -88,17 +88,25 @@ if (isset($_POST['signUp'])) {
             $insertStudent->bindparam('year_group', $year_group);
             $insertStudent->bindparam('section', $section);
 
+?>
+            <script>
+                var myModalEl = document.getElementById('addStudent');
+                var modal = bootstrap.Modal.getInstance(myModalEl)
+                modal.hide();
+            </script>
+<?php
+
             try {
                 $mail->IsSMTP();
                 $mail->Host = "smtp.gmail.com";
                 $mail->SMTPAuth = true;
 
-                $mail->Username = "Aitech1122@gmail.com";
+                $mail->Username = "aitechs1122@gmail.com";
                 $mail->Password = "kdebvodkiqsrdulj";
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = '587';
 
-                $mail->SetFrom('Aitech1122@gmail.com');
+                $mail->SetFrom('aitechs1122@gmail.com');
                 $mail->AddAddress($recipient);
 
                 $mail->IsHTML(true);
@@ -148,9 +156,6 @@ if (isset($_POST['signUp'])) {
             showConfirmButton: false
         });
 
-        var myModalEl = document.getElementById('addStudent');
-        var modal = bootstrap.Modal.getInstance(myModalEl)
-        modal.hide();
         $('#studentsTable').DataTable().ajax.reload();
     }
 </script>

@@ -19,24 +19,7 @@ $primaryKey = 'fees_id';
 $columns = array(
     array('db' => 'fees_title', 'dt' => 0),
     array('db' => 'fees_description',  'dt' => 1),
-    array(
-        'db'        => 'year_included',
-        'dt'        => 2,
-        'formatter' => function ($d, $row) {
-            if ($d == 5) {
-                $d = 'All';
-            } elseif ($d == 1) {
-                $d = '1st Year';
-            } elseif ($d == 2) {
-                $d = '2nd Year';
-            } elseif ($d == 3) {
-                $d = '3rd Year';
-            } elseif ($d == 4) {
-                $d = '4th Year';
-            }
-            return $d;
-        }
-    ),
+    array('db' => 'year_included',  'dt' => 2),
     array('db' => 'cost',      'dt' => 3),
     array(
         'db'        => 'deadline',

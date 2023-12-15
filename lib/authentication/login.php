@@ -46,6 +46,7 @@ if (isset($_POST['login'])) {
                 $_SESSION['fullname'] = 'Administrator';
                 $_SESSION['firstname'] = 'Admin';
                 $_SESSION['status']  = 1;
+                $_SESSION['student_id'] = $id;
             } else {
                 $_SESSION['userType'] = '3';
                 $select = $pdo->prepare("SELECT * FROM students WHERE user_id = '$id'");

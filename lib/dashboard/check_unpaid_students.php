@@ -2,7 +2,6 @@
 session_start();
 include_once '../databaseHandler/connection.php';
 
-$sections = ["A", "B", "C", "D", "E", "F", "G", "H", "I"];
 
 if (isset($_POST['datas'][0])) {
 
@@ -33,20 +32,20 @@ if (isset($_POST['datas'][0])) {
             $checkStatus->execute();
 
             $result = $checkStatus->fetchAll();
-            if (empty($result) && $year_include == 5 || $year_include == $year_group[$a]) {
+            if (empty($result) && $year_include == "All" || $year_include == $year_group[$a]) {
 
 ?>
                 <tr>
                     <th><?php echo $firstname[$a] . " " . $middlename[$a] . " " . $lastname[$a]; ?></th>
-                    <th><?php echo  $year_group[$a] . " - " . $sections[$section[$a] - 1]; ?></th>
+                    <th><?php echo  $year_group[$a] . " - " . $section[$a]; ?></th>
                     <th><?php echo $fee_cost; ?></th>
                 </tr>
             <?php
-            } elseif ($result[0]['status'] != 1 && $year_include == 5 || $year_include == $year_group[$a]) {
+            } elseif ($result[0]['status'] != 1 && $year_include == "All" || $year_include == $year_group[$a]) {
             ?>
                 <tr>
                     <th><?php echo $firstname[$a] . " " . $middlename[$a] . " " . $lastname[$a]; ?></th>
-                    <th><?php echo  $year_group[$a] . " - " . $sections[$section[$a] - 1]; ?></th>
+                    <th><?php echo  $year_group[$a] . " - " . $section[$a]; ?></th>
                     <th><?php echo $fee_cost - $result[0]['cost']; ?></th>
                 </tr>
 
