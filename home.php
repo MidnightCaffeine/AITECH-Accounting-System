@@ -3,6 +3,7 @@ $page = 'Home';
 require_once 'lib/databaseHandler/connection.php';
 require_once 'lib/init.php';
 require_once 'lib/no_session_bypass.php';
+date_default_timezone_set('Asia/Manila');
 
 ?>
 
