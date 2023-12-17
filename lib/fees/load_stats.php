@@ -17,7 +17,7 @@ if (isset($_POST['datas'][0])) {
     if ($years == "All") {
         $query = "SELECT status FROM students";
     } else {
-        $query = "SELECT status FROM students WHERE year_group = $years";
+        $query = "SELECT status FROM students WHERE year_group = '$years'";
     }
     $paid = $pdo->prepare($query);
     if ($paid->execute()) {

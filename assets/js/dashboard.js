@@ -20,6 +20,7 @@ $(document).ready(function () {
         var year_include = $(this).attr("name");
 
         $("#view_students").modal("show");
+        console.log("clicked");
     
         // $( "#unpaid_students" ).load( "lib/dashboard/check_unpaid_students.php", { "datas[]": [ fees_id, year_include ] } );
         $( "#freshman_table" ).load( "lib/dashboard/unpaid_freshman.php", { "datas[]": [ fees_id, year_include ] } );

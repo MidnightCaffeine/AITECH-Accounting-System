@@ -7,6 +7,7 @@ if (isset($_POST['datas'][0])) {
 
     $fees_id = $_POST['datas'][0];
     $year_include = $_POST['datas'][1];
+    $year_group = "1st Year";
 
     $fee_query = "SELECT * FROM fees_list WHERE fees_id = $fees_id";
     $fee = $pdo->prepare($fee_query);
@@ -15,45 +16,26 @@ if (isset($_POST['datas'][0])) {
         $fee_cost = $row["cost"];
     }
 
-    $query = "SELECT * FROM students";
-    $statement = $pdo->prepare($query);
-    if ($statement->execute()) {
+    $query = "SELECT s.student_id, s.firstname, s.lastname, s.middlename, s.year_group, s.section FROM students s LEFT  JOIN payment_list p ON s.student_id = p.student_id WHERE s.year_group = :year_group AND p.fees_id = :fees_id AND p.student_id is NULL";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':year_group', $year_group);
+    $stmt->bindParam(':fees_id', $fees_id);
+    if ($stmt->execute()) {
 
-        while ($row = $statement->fetch(PDO::FETCH_ASSOC)) {
-            $a = 0;
-            $student_id = [$row["student_id"]];
-            $firstname = [$row["firstname"]];
-            $middlename = [$row["middlename"]];
-            $lastname = [$row["lastname"]];
-            $year_group = [$row["year_group"]];
-            $section = [$row["section"]];
+        $unpaid_students = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $checkStatus = $pdo->prepare("SELECT * FROM payment_list WHERE student_id = $student_id[$a] AND fees_id = $fees_id");
-            $checkStatus->execute();
-
-            $result = $checkStatus->fetchAll();
-            if (empty($result) && $year_include == "All" || $year_include == $year_group[$a]) {
-
+        foreach ($unpaid_students as $student) {
 ?>
-                <tr>
-                    <th><?php echo $firstname[$a] . " " . $middlename[$a] . " " . $lastname[$a]; ?></th>
-                    <th><?php echo  $year_group[$a] . " - " . $section[$a]; ?></th>
-                    <th><?php echo $fee_cost; ?></th>
-                </tr>
-            <?php
-            } elseif ($result[0]['status'] != 1 && $year_include == "All" || $year_include == $year_group[$a]) {
-            ?>
-                <tr>
-                    <th><?php echo $firstname[$a] . " " . $middlename[$a] . " " . $lastname[$a]; ?></th>
-                    <th><?php echo  $year_group[$a] . " - " . $section[$a]; ?></th>
-                    <th><?php echo $fee_cost - $result[0]['cost']; ?></th>
-                </tr>
-
+            <tr>
+                <th><?php echo $student['firstname'] . " " . $student['middlename'] . " " . $student['lastname']; ?></th>
+                <th><?php echo  $student['year_group'] . " - " . $student['section']; ?></th>
+                <th><?php echo $fee_cost; ?></th>
+            </tr>
 <?php
-            }
-
-
-            $a++;
         }
+
+        // while ($row = $unpaid->fetch(PDO::FETCH_ASSOC)) {
+        // }
     }
 }
+?>
