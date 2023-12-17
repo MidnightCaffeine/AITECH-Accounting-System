@@ -80,7 +80,7 @@ require_once 'lib/no_session_bypass.php';
                      </div>
 
                      <div id="moreLogs" class="mt-3 container-fluid d-flex justify-content-center align-items-center custom-container">
-                        <a href="logs.php" class="btn btn-primary block">View All Logs</a>
+                        <a href="<?php if($_SESSION['userType'] != 1){echo 'client_logs.php';}else{echo 'logs.php';}?>" class="btn btn-primary block">View All Logs</a>
                      </div>
                   </div>
                </div>
