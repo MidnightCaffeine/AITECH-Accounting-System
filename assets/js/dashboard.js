@@ -27,6 +27,7 @@ $(document).ready(function () {
         $( "#sophomore_table" ).load( "lib/dashboard/unpaid_sophomore.php", { "datas[]": [ fees_id, year_include ] } );
         $( "#junior_table" ).load( "lib/dashboard/unpaid_junior.php", { "datas[]": [ fees_id, year_include ] } );
         $( "#senior_table" ).load( "lib/dashboard/unpaid_senior.php", { "datas[]": [ fees_id, year_include ] } );
+        $( "#irregular_table" ).load( "lib/dashboard/unpaid_irreg.php", { "datas[]": [ fees_id, year_include ] } );
     });
 
 });

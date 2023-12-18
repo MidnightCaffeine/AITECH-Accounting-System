@@ -7,7 +7,7 @@ if (isset($_POST['datas'][0])) {
 
     $fees_id = $_POST['datas'][0];
 
-    $year_group = "1st Year";
+    $year_group = "Irregular";
 
     $fee_query = "SELECT * FROM fees_list WHERE fees_id = $fees_id";
     $fee = $pdo->prepare($fee_query);

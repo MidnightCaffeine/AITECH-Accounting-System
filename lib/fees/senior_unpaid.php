@@ -34,13 +34,18 @@ if (isset($_POST['datas'][0])) {
             $unpaid_students = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             if (empty($unpaid_students)) {
-                echo "No Data Found";
+?>
+                <tr>
+                    <td colspan="3">
+                        <?php echo "This Year Group Is Not Included on The Fee"; ?>
+                    </td>
+                </tr>
+                <?php
             } else {
 
                 foreach ($unpaid_students as $student) {
                     if ($student['year_group'] == $year_group) {
-
-?>
+                ?>
                         <tr>
                             <th><?php echo $student['firstname'] . " " . $student['middlename'] . " " . $student['lastname']; ?></th>
                             <th><?php echo  $student['year_group'] . " - " . $student['section']; ?></th>

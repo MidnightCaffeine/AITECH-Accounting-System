@@ -125,16 +125,19 @@ date_default_timezone_set('Asia/Manila');
 
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Freshman</button>
+                            <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">1st Year</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Sophomore</button>
+                            <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">2nd Year</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="junior-tab" data-bs-toggle="tab" data-bs-target="#junior-tab-pane" type="button" role="tab" aria-controls="junior-tab-pane" aria-selected="true">Junior</button>
+                            <button class="nav-link" id="junior-tab" data-bs-toggle="tab" data-bs-target="#junior-tab-pane" type="button" role="tab" aria-controls="junior-tab-pane" aria-selected="true">3rd Year</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="senior-tab-label" data-bs-toggle="tab" data-bs-target="#senior-tab" type="button" role="tab" aria-controls="senior-tab" aria-selected="false">Senior</button>
+                            <button class="nav-link" id="senior-tab-label" data-bs-toggle="tab" data-bs-target="#senior-tab" type="button" role="tab" aria-controls="senior-tab" aria-selected="false">4th Year</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="irregular-tab-label" data-bs-toggle="tab" data-bs-target="#irregular-tab" type="button" role="tab" aria-controls="irregular-tab" aria-selected="false">Irreg</button>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -190,6 +193,20 @@ date_default_timezone_set('Asia/Manila');
                                     </tr>
                                 </thead>
                                 <tbody id="senior_table">
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-pane fade" id="irregular-tab" role="tabpanel" aria-labelledby="irregular-tab-label" tabindex="0">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Year And Section</th>
+                                        <th scope="col">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="irregular_table">
 
                                 </tbody>
                             </table>

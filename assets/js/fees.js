@@ -132,23 +132,38 @@ $(document).ready(function () {
     $("#freshman_paid").load("lib/fees/view_paid.php", {
       "datas[]": [fees_id],
     });
-    $("#sophomore_paid").load("lib/fees/view_sophomore_paid.php", {
-      "datas[]": [fees_id],
-    });
-    $("#junior_paid").load("lib/fees/junior_paid.php", {
-      "datas[]": [fees_id],
-    });
-    $("#senior_paid").load("lib/fees/senior_paid.php", {
+    $("#freshman_unpaid").load("lib/fees/fresh_unpaid.php", {
       "datas[]": [fees_id],
     });
 
-    $("#freshman_unpaid").load("lib/fees/fresh_unpaid.php", {
+    $("#sophomore_paid").load("lib/fees/view_sophomore_paid.php", {
       "datas[]": [fees_id],
     });
     $("#sophomore_unpaid").load("lib/fees/sophomore_unpaid.php", {
       "datas[]": [fees_id],
     });
+
+    $("#junior_paid").load("lib/fees/junior_paid.php", {
+      "datas[]": [fees_id],
+    });
     $("#junior_unpaid").load("lib/fees/junior_unpaid.php", {
+      "datas[]": [fees_id],
+    });
+
+
+    $("#senior_paid").load("lib/fees/senior_paid.php", {
+      "datas[]": [fees_id],
+    });
+    $("#senior_unpaid").load("lib/fees/senior_unpaid.php", {
+      "datas[]": [fees_id],
+    });
+
+
+    $("#irregular_paid").load("lib/fees/irreg_paid.php", {
+      "datas[]": [fees_id],
+    });
+
+    $("#irregular_unpaid").load("lib/fees/irreg_unpaid.php", {
       "datas[]": [fees_id],
     });
   });
