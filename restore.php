@@ -9,7 +9,14 @@ $d = date("Y-m-d");
 $t = date("h:i:s A");
 
 ini_set('display_errors', 0);
-
+if($_SESSION['userType'] != 1){
+    if(!isset($_SESSION['fullname'])){
+        header("Location: index.php");
+    }else{
+        header("Location: home.php");
+    }
+    
+}
 ?>
 
 <!DOCTYPE html>

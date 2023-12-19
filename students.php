@@ -3,7 +3,13 @@ $page = 'Students';
 require_once 'lib/databaseHandler/connection.php';
 require_once 'lib/init.php';
 require_once 'lib/no_session_bypass.php';
-
+if ($_SESSION['userType'] != 1) {
+    if (!isset($_SESSION['fullname'])) {
+        header("Location: index.php");
+    } else {
+        header("Location: home.php");
+    }
+}
 ?>
 
 <!DOCTYPE html>

@@ -8,7 +8,13 @@ require_once 'lib/no_session_bypass.php';
 date_default_timezone_set('Asia/Manila');
 $d = date("Y-m-d");
 $t = date("h:i:s A");
-
+if ($_SESSION['userType'] != 1) {
+    if (!isset($_SESSION['fullname'])) {
+        header("Location: index.php");
+    } else {
+        header("Location: home.php");
+    }
+}
 ?>
 
 <!DOCTYPE html>

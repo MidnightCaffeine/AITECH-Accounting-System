@@ -5,7 +5,13 @@ require_once 'lib/init.php';
 require_once 'lib/no_session_bypass.php';
 date_default_timezone_set('Asia/Manila');
 require_once 'assets/includes/time_relative.php';
-
+if ($_SESSION['userType'] != 1) {
+   if (!isset($_SESSION['fullname'])) {
+      header("Location: index.php");
+   } else {
+      header("Location: home.php");
+   }
+}
 ?>
 
 <!DOCTYPE html>
