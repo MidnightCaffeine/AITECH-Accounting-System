@@ -190,3 +190,10 @@ input:focus, textarea:focus {
 .input-error{
   box-shadow: 0 0 5px red;
 }
+
+.input-success{
+  box-shadow: 0 0 5px rgb(0, 255, 42);
+}
+.form-success {
+  color: rgb(0, 255, 42);
+}

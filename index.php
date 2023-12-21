@@ -4,9 +4,9 @@ require_once 'lib/databaseHandler/connection.php';
 require_once 'lib/init.php';
 
 if (isset($_SESSION['fullname'])) {
-    if($_SESSION['userType'] != 1){
+    if ($_SESSION['userType'] != 1) {
         header("Location: home.php");
-    }else{
+    } else {
         header("Location: admin_dashboard.php");
     }
 }
@@ -31,64 +31,8 @@ if (isset($_SESSION['fullname'])) {
     <link rel="stylesheet" href="assets/css/animate.min.css" />
     <link rel="stylesheet" href="assets/css/sweetalert2.min.css" />
     <script type="text/javascript" src="assets/js/sweetalert2.all.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#register').submit(function(event) {
-                event.preventDefault();
+    <script type="text/javascript" src="assets/js/authentication.js"></script>
 
-                var register_firstname = $('#register_firstname').val();
-                var register_lastname = $('#register_lastname').val();
-                var register_middlename = $('#register_middlename').val();
-                var register_email = $('#register_email').val();
-                var year_group = $('#year_group').val();
-                var section = $('#section').val();
-                var register_password = $('#register_password').val();
-                var confirm_password = $('#confirm_password').val();
-                var signUp = $('#signUp').val();
-
-                $(".form-message").load("lib/authentication/register.php", {
-                    register_firstname: register_firstname,
-                    register_lastname: register_lastname,
-                    register_middlename: register_middlename,
-                    register_email: register_email,
-                    year_group: year_group,
-                    section: section,
-                    register_password: register_password,
-                    confirm_password: confirm_password,
-                    signUp: signUp
-
-                });
-            });
-
-            $('#login-form').submit(function(event) {
-                event.preventDefault();
-
-                var email = $('#email').val();
-                var password = $('#password').val();
-                var login = $('#login').val();
-
-                $(".login-message").load("lib/authentication/login.php", {
-                    email: email,
-                    password: password,
-                    login: login
-                });
-
-            });
-
-            $('#confirmation_form').submit(function(event) {
-                event.preventDefault();
-
-                var confirmation_code = $('#confirmation').val();
-                var confirm_submit = $('#confirmSubmit').val();
-
-                $(".verification_message").load("lib/authentication/confirmation.php", {
-                    confirmation_code,
-                    confirm_submit
-                });
-
-            });
-        });
-    </script>
 
 </head>
 
@@ -118,7 +62,9 @@ if (isset($_SESSION['fullname'])) {
                             </div>
                             <input name="btn_login" id="login" class="btn btn-block login-btn" type="submit" value="Login" />
                         </form>
-                        <a href="#!" class="forgot-password-link">Forgot password?</a>
+                        <a class="forgot-password-link " href="forget_password.php">Forgot password?</a>
+
+
                         <p class="login-wrapper-footer-text">
                             Don't have an account?
                             <a data-target="#addStudent" data-bs-toggle="modal" href="#addStudent">Create an account</a>
@@ -251,6 +197,48 @@ if (isset($_SESSION['fullname'])) {
             </div>
         </div>
     </div>
+    <!-- <div class="modal fade" id="forget_password" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="forgotPass" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="forgotPass">Forgot Password</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form autocomplete="off" id="send_email_form" action="lib/authentication/send_email.php" method="post">
+                        <input autocomplete="false" name="hidden" type="text" style="display:none;">
+                        <p class="verification_message mb-2 mt-2"></p>
+                        <div class="row g-2">
+                            <div class="col-sm-6">
+                                <div class="form-floating mb-3">
+                                    <input type="text" class="form-control" id="forgot_email" name="forgot_email" placeholder="Registered Email">
+                                    <label for="forgot_email">Registered Email</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="col-md-12 text-center block">
+                                    <button type="submit" name="send_otp" id="send_otp" class="btn btn-success w-100">Send OTP</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form autocomplete="off" id="otp_form" action="lib/authentication/forgot_password.php" method="post">
+                        <div class="row g-2">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="otpCode" name="otpCode" placeholder="OTP">
+                                <label for="otpCode">OTP</label>
+                            </div>
+                            <div class="col-md-12 text-center block">
+                                <button type="submit" name="submitOTP" id="submitOTP" class="btn btn-success w-100">Verify Email</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div> -->
 </body>
 
 </html>

@@ -1200,3 +1200,10 @@ h6 {
   background: #0f93df;
   color: white;
 }
+
+.input-success{
+  box-shadow: 0 0 5px rgb(6, 153, 31);
+}
+.form-success {
+  color: rgb(6, 153, 31);
+}
